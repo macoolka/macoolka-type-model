@@ -1,0 +1,373 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Network</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-network@latest/dist/vis-network.min.js"></script>
+  <link href="https://unpkg.com/vis-network@latest/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    #mynetwork {
+      width: 600px;
+      height: 400px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="mynetwork"></div>
+  <script type="text/javascript">
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      {
+        "id": "MEnumScalar",
+        "label": "MEnumScalar"
+      },
+      {
+        "id": "MScalable",
+        "label": "MScalable"
+      },
+      {
+        "id": "MJsonScalar",
+        "label": "MJsonScalar"
+      },
+      {
+        "id": "MStringScalar",
+        "label": "MStringScalar"
+      },
+      {
+        "id": "MStringFormat",
+        "label": "MStringFormat"
+      },
+      {
+        "id": "MNumberScalar",
+        "label": "MNumberScalar"
+      },
+      {
+        "id": "MIntScalar",
+        "label": "MIntScalar"
+      },
+      {
+        "id": "MBooleanScalar",
+        "label": "MBooleanScalar"
+      },
+      {
+        "id": "MDateTimeScalar",
+        "label": "MDateTimeScalar"
+      },
+      {
+        "id": "MKindScalar",
+        "label": "MKindScalar"
+      },
+      {
+        "id": "MTypeScalar",
+        "label": "MTypeScalar"
+      },
+      {
+        "id": "MTypeUnionScalar",
+        "label": "MTypeUnionScalar"
+      },
+      {
+        "id": "MTypeIntersectionScalar",
+        "label": "MTypeIntersectionScalar"
+      },
+      {
+        "id": "MValueable",
+        "label": "MValueable"
+      },
+      {
+        "id": "MScalars",
+        "label": "MScalars"
+      },
+      {
+        "id": "MBasicScalar",
+        "label": "MBasicScalar"
+      },
+      {
+        "id": "MVariable",
+        "label": "MVariable"
+      },
+      {
+        "id": "MDocumentable",
+        "label": "MDocumentable"
+      },
+      {
+        "id": "MNameable",
+        "label": "MNameable"
+      },
+      {
+        "id": "MField",
+        "label": "MField"
+      },
+      {
+        "id": "MParam",
+        "label": "MParam"
+      },
+      {
+        "id": "MFunctional",
+        "label": "MFunctional"
+      },
+      {
+        "id": "MMethod",
+        "label": "MMethod"
+      },
+      {
+        "id": "MStaticMethod",
+        "label": "MStaticMethod"
+      },
+      {
+        "id": "MFunction",
+        "label": "MFunction"
+      },
+      {
+        "id": "MExportable",
+        "label": "MExportable"
+      },
+      {
+        "id": "MConstant",
+        "label": "MConstant"
+      },
+      {
+        "id": "MExport",
+        "label": "MExport"
+      },
+      {
+        "id": "MTypeable",
+        "label": "MTypeable"
+      },
+      {
+        "id": "MInterface",
+        "label": "MInterface"
+      },
+      {
+        "id": "MClass",
+        "label": "MClass"
+      },
+      {
+        "id": "MTypeAlias",
+        "label": "MTypeAlias"
+      },
+      {
+        "id": "MModule",
+        "label": "MModule"
+      },
+      {
+        "id": "MIdentifierKind",
+        "label": "MIdentifierKind"
+      }
+
+
+    ]);
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+    {
+            "from": "MEnumScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MJsonScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MStringScalar",
+            "to": "MStringFormat"
+        },
+        {
+            "from": "MStringScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MNumberScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MIntScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MBooleanScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MDateTimeScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MKindScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MTypeScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MTypeUnionScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MTypeIntersectionScalar",
+            "to": "MScalable"
+        },
+        {
+            "from": "MValueable",
+            "to": "MScalars"
+        },
+        {
+            "from": "MValueable",
+            "to": "MBasicScalar"
+        },
+        {
+            "from": "MVariable",
+            "to": "MDocumentable"
+        },
+        {
+            "from": "MVariable",
+            "to": "MValueable"
+        },
+        {
+            "from": "MVariable",
+            "to": "MNameable"
+        },
+        {
+            "from": "MField",
+            "to": "MVariable"
+        },
+        {
+            "from": "MParam",
+            "to": "MVariable"
+        },
+        {
+            "from": "MFunctional",
+            "to": "MParam"
+        },
+        {
+            "from": "MFunctional",
+            "to": "MDocumentable"
+        },
+        {
+            "from": "MFunctional",
+            "to": "MValueable"
+        },
+        {
+            "from": "MFunctional",
+            "to": "MNameable"
+        },
+        {
+            "from": "MMethod",
+            "to": "MFunctional"
+        },
+        {
+            "from": "MStaticMethod",
+            "to": "MFunctional"
+        },
+        {
+            "from": "MFunction",
+            "to": "MFunctional"
+        },
+        {
+            "from": "MFunction",
+            "to": "MExportable"
+        },
+        {
+            "from": "MConstant",
+            "to": "MVariable"
+        },
+        {
+            "from": "MConstant",
+            "to": "MExportable"
+        },
+        {
+            "from": "MExport",
+            "to": "MDocumentable"
+        },
+        {
+            "from": "MExport",
+            "to": "MNameable"
+        },
+        {
+            "from": "MTypeable",
+            "to": "MField"
+        },
+        {
+            "from": "MTypeable",
+            "to": "MMethod"
+        },
+        {
+            "from": "MTypeable",
+            "to": "MDocumentable"
+        },
+        {
+            "from": "MTypeable",
+            "to": "MExportable"
+        },
+        {
+            "from": "MTypeable",
+            "to": "MNameable"
+        },
+        {
+            "from": "MInterface",
+            "to": "MTypeable"
+        },
+        {
+            "from": "MClass",
+            "to": "MStaticMethod"
+        },
+        {
+            "from": "MClass",
+            "to": "MTypeable"
+        },
+        {
+            "from": "MTypeAlias",
+            "to": "MTypeable"
+        },
+        {
+            "from": "MTypeAlias",
+            "to": "MValueable"
+        },
+        {
+            "from": "MModule",
+            "to": "MInterface"
+        },
+        {
+            "from": "MModule",
+            "to": "MTypeAlias"
+        },
+        {
+            "from": "MModule",
+            "to": "MClass"
+        },
+        {
+            "from": "MModule",
+            "to": "MFunction"
+        },
+        {
+            "from": "MModule",
+            "to": "MExport"
+        },
+        {
+            "from": "MModule",
+            "to": "MConstant"
+        },
+        {
+            "from": "MModule",
+            "to": "MDocumentable"
+        },
+        {
+            "from": "MModule",
+            "to": "MNameable"
+        }
+    ]);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = {};
+    var network = new vis.Network(container, data, options);
+  </script>
+</body>
+
+</html>

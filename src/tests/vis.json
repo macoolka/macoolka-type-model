@@ -1,0 +1,1 @@
+{"nodes":[{"id":"O1","label":"O1"},{"id":"E1","label":"E1"},{"id":"E2","label":"E2"},{"id":"O2","label":"O2"}],"edges":[{"from":"O1","to":"E1"},{"from":"O1","to":"E2"},{"from":"O2","to":"E1"},{"from":"O2","to":"E2"},{"from":"O2","to":"O1"}]}

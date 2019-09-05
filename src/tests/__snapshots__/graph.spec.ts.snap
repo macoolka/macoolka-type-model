@@ -1,0 +1,387 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`graph build Schema Graph 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "from": "MEnumScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MJsonScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MStringScalar",
+      "to": "MStringFormat",
+    },
+    Object {
+      "from": "MStringScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MNumberScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MIntScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MBooleanScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MDateTimeScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MKindScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MTypeScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MTypeUnionScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MTypeIntersectionScalar",
+      "to": "MScalable",
+    },
+    Object {
+      "from": "MValueable",
+      "to": "MScalars",
+    },
+    Object {
+      "from": "MValueable",
+      "to": "MBasicScalar",
+    },
+    Object {
+      "from": "MVariable",
+      "to": "MDocumentable",
+    },
+    Object {
+      "from": "MVariable",
+      "to": "MValueable",
+    },
+    Object {
+      "from": "MVariable",
+      "to": "MNameable",
+    },
+    Object {
+      "from": "MField",
+      "to": "MVariable",
+    },
+    Object {
+      "from": "MParam",
+      "to": "MVariable",
+    },
+    Object {
+      "from": "MFunctional",
+      "to": "MParam",
+    },
+    Object {
+      "from": "MFunctional",
+      "to": "MDocumentable",
+    },
+    Object {
+      "from": "MFunctional",
+      "to": "MValueable",
+    },
+    Object {
+      "from": "MFunctional",
+      "to": "MNameable",
+    },
+    Object {
+      "from": "MMethod",
+      "to": "MFunctional",
+    },
+    Object {
+      "from": "MStaticMethod",
+      "to": "MFunctional",
+    },
+    Object {
+      "from": "MFunction",
+      "to": "MFunctional",
+    },
+    Object {
+      "from": "MFunction",
+      "to": "MExportable",
+    },
+    Object {
+      "from": "MConstant",
+      "to": "MVariable",
+    },
+    Object {
+      "from": "MConstant",
+      "to": "MExportable",
+    },
+    Object {
+      "from": "MExport",
+      "to": "MDocumentable",
+    },
+    Object {
+      "from": "MExport",
+      "to": "MNameable",
+    },
+    Object {
+      "from": "MTypeable",
+      "to": "MField",
+    },
+    Object {
+      "from": "MTypeable",
+      "to": "MMethod",
+    },
+    Object {
+      "from": "MTypeable",
+      "to": "MDocumentable",
+    },
+    Object {
+      "from": "MTypeable",
+      "to": "MExportable",
+    },
+    Object {
+      "from": "MTypeable",
+      "to": "MNameable",
+    },
+    Object {
+      "from": "MInterface",
+      "to": "MTypeable",
+    },
+    Object {
+      "from": "MClass",
+      "to": "MStaticMethod",
+    },
+    Object {
+      "from": "MClass",
+      "to": "MTypeable",
+    },
+    Object {
+      "from": "MTypeAlias",
+      "to": "MTypeable",
+    },
+    Object {
+      "from": "MTypeAlias",
+      "to": "MValueable",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MInterface",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MTypeAlias",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MClass",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MFunction",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MExport",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MConstant",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MDocumentable",
+    },
+    Object {
+      "from": "MModule",
+      "to": "MNameable",
+    },
+  ],
+  "nodes": Array [
+    Object {
+      "id": "MEnumScalar",
+      "label": "MEnumScalar",
+    },
+    Object {
+      "id": "MScalable",
+      "label": "MScalable",
+    },
+    Object {
+      "id": "MJsonScalar",
+      "label": "MJsonScalar",
+    },
+    Object {
+      "id": "MStringScalar",
+      "label": "MStringScalar",
+    },
+    Object {
+      "id": "MStringFormat",
+      "label": "MStringFormat",
+    },
+    Object {
+      "id": "MNumberScalar",
+      "label": "MNumberScalar",
+    },
+    Object {
+      "id": "MIntScalar",
+      "label": "MIntScalar",
+    },
+    Object {
+      "id": "MBooleanScalar",
+      "label": "MBooleanScalar",
+    },
+    Object {
+      "id": "MDateTimeScalar",
+      "label": "MDateTimeScalar",
+    },
+    Object {
+      "id": "MKindScalar",
+      "label": "MKindScalar",
+    },
+    Object {
+      "id": "MTypeScalar",
+      "label": "MTypeScalar",
+    },
+    Object {
+      "id": "MTypeUnionScalar",
+      "label": "MTypeUnionScalar",
+    },
+    Object {
+      "id": "MTypeIntersectionScalar",
+      "label": "MTypeIntersectionScalar",
+    },
+    Object {
+      "id": "MValueable",
+      "label": "MValueable",
+    },
+    Object {
+      "id": "MScalars",
+      "label": "MScalars",
+    },
+    Object {
+      "id": "MBasicScalar",
+      "label": "MBasicScalar",
+    },
+    Object {
+      "id": "MVariable",
+      "label": "MVariable",
+    },
+    Object {
+      "id": "MDocumentable",
+      "label": "MDocumentable",
+    },
+    Object {
+      "id": "MNameable",
+      "label": "MNameable",
+    },
+    Object {
+      "id": "MField",
+      "label": "MField",
+    },
+    Object {
+      "id": "MParam",
+      "label": "MParam",
+    },
+    Object {
+      "id": "MFunctional",
+      "label": "MFunctional",
+    },
+    Object {
+      "id": "MMethod",
+      "label": "MMethod",
+    },
+    Object {
+      "id": "MStaticMethod",
+      "label": "MStaticMethod",
+    },
+    Object {
+      "id": "MFunction",
+      "label": "MFunction",
+    },
+    Object {
+      "id": "MExportable",
+      "label": "MExportable",
+    },
+    Object {
+      "id": "MConstant",
+      "label": "MConstant",
+    },
+    Object {
+      "id": "MExport",
+      "label": "MExport",
+    },
+    Object {
+      "id": "MTypeable",
+      "label": "MTypeable",
+    },
+    Object {
+      "id": "MInterface",
+      "label": "MInterface",
+    },
+    Object {
+      "id": "MClass",
+      "label": "MClass",
+    },
+    Object {
+      "id": "MTypeAlias",
+      "label": "MTypeAlias",
+    },
+    Object {
+      "id": "MModule",
+      "label": "MModule",
+    },
+    Object {
+      "id": "MIdentifierKind",
+      "label": "MIdentifierKind",
+    },
+  ],
+}
+`;
+
+exports[`graph buildGraph 1`] = `
+Object {
+  "edges": Array [
+    Object {
+      "from": "O1",
+      "to": "E1",
+    },
+    Object {
+      "from": "O1",
+      "to": "E2",
+    },
+    Object {
+      "from": "O2",
+      "to": "E1",
+    },
+    Object {
+      "from": "O2",
+      "to": "E2",
+    },
+    Object {
+      "from": "O2",
+      "to": "O1",
+    },
+  ],
+  "nodes": Array [
+    Object {
+      "id": "O1",
+      "label": "O1",
+    },
+    Object {
+      "id": "E1",
+      "label": "E1",
+    },
+    Object {
+      "id": "E2",
+      "label": "E2",
+    },
+    Object {
+      "id": "O2",
+      "label": "O2",
+    },
+  ],
+}
+`;

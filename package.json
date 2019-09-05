@@ -1,0 +1,53 @@
+{
+  "name": "macoolka-type-model",
+  "version": "0.5.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "author": "fastspeeed@gmail.com",
+  "scripts": {
+    "reinstall": "rm -rf node_modules/ && yarn install",
+    "clean": "rm -rf lib/ coverage/ ",
+    "lint": "tslint -p tsconfig.json",
+    "lint:fix": "tslint -p tsconfig.json --fix",
+    "test": "jest",
+    "test:watch": "jest --config jest.config.json --watch ./src",
+    "build": "rm -rf lib/ && tsc ",
+    "gen": "prisma generate",
+    "precommit": "npm run lint",
+    "prepush": "npm run test",
+    "coverage": "rimraf coverage && jest --config jest.config.json --coverage",
+    "dtslint": "dtslint dtslint"
+  },
+  "dependencies": {
+    "fp-ts": "^2.0.2",
+    "io-ts": "^2.0.1",
+    "macoolka-algorithms": "^0.2.0",
+    "macoolka-io": "^0.2.0"
+  },
+  "devDependencies": {},
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(./src/*|\\.(test|spec))\\.(ts|tsx)$"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/macoolka/macoolka-fp.git"
+  },
+  "keywords": [
+    "macoolka",
+    "typescript",
+    "algebraic-data-types",
+    "functional-programming"
+  ],
+  "license": "MIT"
+}
