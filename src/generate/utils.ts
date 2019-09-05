@@ -6,7 +6,7 @@
  */
 import { monoidString, fold as _fold } from 'fp-ts/lib/Monoid'
 import { pipe } from 'fp-ts/lib/pipeable'
-import { notEmpty } from 'macoolka-predicate'
+import { notEmpty, notMaybe } from 'macoolka-predicate'
 import { MDocumentable } from '../models/Module'
 import * as A from 'fp-ts/lib/Array'
 const fold = _fold(monoidString)
@@ -51,7 +51,7 @@ export interface NodeGroup {
      * @desczh
      * 主体内容
      */
-    content: string[],
+    content: Array<string>,
     /**
      * content's split
      * @desczh
@@ -60,7 +60,7 @@ export interface NodeGroup {
     split?: string,
 }
 /**
- * 
+ *
  * @since 0.2.0
  */
 export interface CodeOption {
@@ -81,7 +81,9 @@ const standIndent = (i: number): string => {
     if (i === 0) {
         return ''
     }
-    return indentations[i] || new Array(i).join(`  `)
+    return notMaybe(indentations[i])
+        ? indentations[i]
+        : new Array(i).join(`  `)
 }
 
 /**
@@ -91,7 +93,7 @@ const standIndent = (i: number): string => {
  * Item maen a statement and description
  * @desczh
  * 提供一些帮助方法在建立`block` `line` `item`
- * 
+ *
  * block包含头尾内容，一般用于interface
  * line是一条语句
  * item是包含注释的语句
@@ -99,25 +101,25 @@ const standIndent = (i: number): string => {
  */
 export const formatCode = ({
     indentMake = standIndent,
-    line = '\n',
+    line = '\n'
 }: CodeOption) => {
 
     /**
-     * 
-     * 
+     *
+     *
      */
     const formatBlock = ({ begin, end, indent, content, split = '' }: NodeGroup) => {
         return pipe(
             [
                 notEmpty(begin) ? (indentMake(indent) + begin) : '',
                 pipe(
-                    content.join(split),
+                    content.join(split)
 
                 ),
-                formatLine(indent)(end),
+                formatLine(indent)(end)
 
             ],
-            fold,
+            fold
         )
     }
     const formatLine = (i: number) => (content: string) => {
@@ -132,14 +134,14 @@ export const formatCode = ({
                     desc
                         ? printDescription(i)(doc)
                         : '',
-                    notEmpty(content) ? formatLine(i)(content) : '',
+                    notEmpty(content) ? formatLine(i)(content) : ''
                 ],
                 fold
             )
         }
 
     function printDescription(indent: number) {
-        return (content: string[]) => {
+        return (content: Array<string>) => {
 
             return content.length > 0
                 ? formatBlock({
@@ -155,20 +157,20 @@ export const formatCode = ({
                 : ''
         }
     }
-  
+
     function documentableToString({ deprecated, description, descriptions, ignore, since, examples, reason }: MDocumentable) {
-        let content: string[] = A.copy(description);
-       
-        if (descriptions) {
+        let content: Array<string> = A.copy(description)
+
+        if (notMaybe(descriptions)) {
             Object.entries(descriptions).map(([key, value]) => {
-                const desc=value as string[];
-                if(desc.length>0){
-   
+                const desc = value as Array<string>
+                if (desc.length > 0) {
+
                     content.push(`@desc${key}`)
-  
+
                     content = content.concat(desc)
                 }
-               
+
             })
         }
         if (notEmpty(examples)) {
@@ -177,25 +179,24 @@ export const formatCode = ({
         }
         if (deprecated) {
             content.push('@deprecated')
-            if (reason) {
+            if (notMaybe(reason)) {
                 content = content.concat(reason)
             }
         }
         if (ignore) {
             content.push('@ignore')
         }
-        if (since) {
+        if (notMaybe(since)) {
             content.push(`@since ${since}`)
         }
 
         return content
     }
 
-
     return {
         formatLine,
         formatBlock,
         formatItem,
-        fold,
+        fold
     }
 }

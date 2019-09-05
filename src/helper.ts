@@ -5,9 +5,9 @@
  * @file
  */
 import { pipe } from 'fp-ts/lib/pipeable'
-import { array } from 'macoolka-collection'
-import { BasicCompareType } from 'macoolka-compare'
-import { MModule, MField,MInterface,  MMethod, MParam,MTypeAlias } from './models/Module'
+import * as  array from 'fp-ts/lib/Array'
+//import { BasicCompareType, CompareObjectModelDefinition } from 'macoolka-compare'
+import { MModule, MField, MInterface, MMethod, MParam, MTypeAlias, MScalars } from './models/Module'
 import { isString } from 'macoolka-predicate'
 import * as O from 'fp-ts/lib/Option'
 /**
@@ -24,7 +24,7 @@ export const foreach = (schema: MModule, option: {
     typealiases?: (e: MTypeAlias, schema: MModule) => void,
     method?: (method: MMethod, model: MInterface, schema: MModule) => void,
     param?: (param: MParam, method: MMethod, model: MInterface, schema: MModule) => void,
-    implement?: (name: string, model: MInterface, schema: MModule) => void,
+    implement?: (name: string, model: MInterface, schema: MModule) => void
 }) => {
 
     pipe(
@@ -132,20 +132,25 @@ export const foreach = (schema: MModule, option: {
 
     )
 
-
-
 }
-export type ScalarType = 'string' | 'number' | 'boolean' | 'enum' |
- 'int' | 'datetime' | 'kind' | 'type' | 'typeUnion' | 'json'|'typeIntersection'
-const getScalarType = (type: MField['type']): ScalarType => {
+export type ScalarTypeName = MScalars['_kind']
+/**
+ * Get a scalar type name
+ * @desczh
+ * 得到标量类型名称
+ * @since 0.2.0
+ */
+export const getScalarTypeName = (type: MField['type']): ScalarTypeName => {
     return isString(type) ? type : type._kind
 }
 
 /**
  * Map table about Modle Type and Compare Type
+ * @desczh
+ * ScalarTypeName到BasicCompareType映射表
  * @since 0.2.0
  */
-const TypeMap: Record<ScalarType, BasicCompareType|'unknow'> = {
+/* const TypeMap: Record<ScalarTypeName, BasicCompareType | 'unknow'> = {
     string: 'string',
     number: 'number',
     boolean: 'boolean',
@@ -155,11 +160,17 @@ const TypeMap: Record<ScalarType, BasicCompareType|'unknow'> = {
     kind: 'unknow',
     type: 'boolean',
     typeUnion: 'unknow',
-    typeIntersection:'unknow',
+    typeIntersection: 'unknow',
     json: 'unknow'
-}
-export const getCompareModelDefinition = (a: MInterface) => {
-    const definition: Record<BasicCompareType, string[]> = {
+} */
+/**
+ * Get CompareObjectModelDefinition with MInterface
+ * @desczh
+ * MInterface到CompareObjectModelDefinition
+ * @since 0.2.0
+ */
+/* export const getCompareModelDefinition = (a: MInterface): CompareObjectModelDefinition => {
+    const definition: Record<BasicCompareType, Array<string>> = {
         string: [],
         number: [],
         enum: [],
@@ -169,16 +180,11 @@ export const getCompareModelDefinition = (a: MInterface) => {
     pipe(
         a.fields,
         array.map(a => {
-            const scalarType = TypeMap[getScalarType(a.type)];
-            if(scalarType!=='unknow')
-            definition[scalarType].push(a.name)
+            const scalarType = TypeMap[getScalarTypeName(a.type)]
+            if (scalarType !== 'unknow') {
+                definition[scalarType].push(a.name)
+            }
         })
     )
-    return definition;
-}
-export const getFieldWithID = (a: MInterface) => {
-    return pipe(
-        a.fields,
-        array.findFirst(field => field.id === true),
-    )
-}
+    return definition
+} */

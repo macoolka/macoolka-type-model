@@ -3,16 +3,18 @@
  */
 import { MField, MInterface, MTypeAlias, MMethod, MModule, MValueable, MVariable } from '../models/Module'
 import { formatCode } from './utils'
-import { TSBuild } from './types'
-import { headerTS } from '../constant'
-import { importsTS } from '../constant'
+import { TSBuild, TSOptions } from './types'
+import { headerTS, importsTS } from '../constant'
 import { isString, isMaybe } from 'macoolka-predicate'
 import * as O from 'fp-ts/lib/Option'
-import { pipe } from 'fp-ts/lib/pipeable';
+import { pipe } from 'fp-ts/lib/pipeable'
+import * as MN from 'macoolka-app/lib/MonadNodeSync'
+import { format } from 'macoolka-prettier'
+type BuildOption = TSOptions & { indent: number }
 const { formatBlock, formatItem, fold } = formatCode({})
 
-function intersection(indent: number) {
-    return (content: string[]) => {
+function intersection({ indent }: BuildOption) {
+    return (content: Array<string>) => {
         return formatBlock({
             begin: ``,
             end: '',
@@ -23,7 +25,7 @@ function intersection(indent: number) {
     }
 }
 function union(_: number) {
-    return (content: string[]) => {
+    return (content: Array<string>) => {
         return content.length === 0 ? 'never' : content.join(' | ')
 
     }
@@ -31,7 +33,8 @@ function union(_: number) {
 /**
  * Get a typesciprt type name with model type
  */
-const getTypeName = (indent: number, isInput: boolean) => (a: MField['type']) => {
+const getTypeName = (option: BuildOption) => (a: MField['type']) => {
+    const { indent, isInput } = option
     if (isString(a)) {
         switch (a) {
             case 'int':
@@ -44,54 +47,57 @@ const getTypeName = (indent: number, isInput: boolean) => (a: MField['type']) =>
                 return a
         }
     }
-    let typename: string;
+    let typename: string
     switch (a._kind) {
-        case "kind": {
+        case 'kind': {
             typename = `'${a.value}'`
-            break;
+            break
         }
         case 'type':
             typename = a.value
-            break;
+            break
         case 'datetime':
             typename = isInput ? 'string' : 'Date'
-            break;
+            break
         case 'int':
             typename = 'number'
-            break;
+            break
         case 'json':
             typename = 'Record<string,any>'
-            break;
+            break
         case 'typeUnion':
-            typename = union(indent)(a.values.map(value => `${value}`))//.join(' | ')
-            break;
+            typename = union(indent)(a.values.map(value => `${value}`))// .join(' | ')
+            break
         case 'typeIntersection':
-            typename = intersection(indent)(a.values.map(value => `${value}`))//.join(' | ')
-            break;
+            typename = intersection(option)(a.values.map(value => `${value}`))// .join(' | ')
+            break
         case 'enum':
-            typename = union(indent)(a.values.map(value => `'${value}'`))//.join(' | ')
-            break;
+            typename = union(indent)(a.values.map(value => `'${value}'`))// .join(' | ')
+            break
         default:
             typename = a._kind
     }
-    const { maybe, isArray, isArrayRequired } = a
+    const { maybe, isArray, isArrayRequired, maybeArray } = a
 
-    const arrayname = isArrayRequired === true ?
-        getNotEmptyArrayName(typename)
-        : isArray === true ?
-            getArrayName(typename)
-            : typename
+    const arrayname = isArrayRequired === true
+        ? getNotEmptyArrayName(typename)
+        : isArray === true
+            ? getArrayName(typename)
+            : maybeArray === true
+                ? getMaybeArrayName(typename)
+                : typename
 
-          //  getMaybeArrayName
+    //  getMaybeArrayName
     return maybe ? arrayname : getNotRequiredName(arrayname)
 
 }
-function printTypeReference(indent: number, isInput: boolean) {
-    return ({ required, type, }: MValueable) => {
+function printTypeReference(option: BuildOption) {
+    return ({ required, type }: MValueable) => {
+        const { isInput } = option
 
         required = isInput && ((!isString(type)) && (!isMaybe(type.defaultValue)
             || (type.isArray === true && type.defaultEmptyArray === true))) ? false : required
-        const typename = getTypeName(indent, isInput)(type);
+        const typename = getTypeName(option)(type)
         return {
             required,
             content: typename
@@ -100,18 +106,19 @@ function printTypeReference(indent: number, isInput: boolean) {
 }
 /**
  * Get typescript's statement with model field
- * 
+ *
  */
-function printField(indent: number, isInput: boolean, end: string = '') {
+function printField(option: BuildOption & { end?: string }) {
     return (field: MVariable) => {
+        const { end = '', indent, showDesc } = option
         const { name, } = field
 
-        const { required, content } = printTypeReference(indent, isInput)(field)
+        const { required, content } = printTypeReference(option)(field)
 
-        const body = printNameBody({ name, required, content, end });
-        return formatItem(indent)({
+        const body = printNameBody({ name, required, content, end })
+        return formatItem(indent, showDesc)({
             content: body,
-            docs:field
+            docs: field
         })
     }
 }
@@ -120,11 +127,11 @@ const printNameBody = ({ required, content, name, end }: { required: boolean, co
         ? ': '
         : '?: '
 
-    return `${name}${split}${content}${end}`;
+    return `${name}${split}${content}${end}`
 }
 const printNameBodyType = ({ content, name, end }: { required: boolean, content: string, name: string, end: string }) => {
 
-    return `${name} = ${content}${end}`;
+    return `${name} = ${content}${end}`
 }
 
 const getArrayName = (name: string) => `Array<${name}>`
@@ -133,22 +140,23 @@ const getNotEmptyArrayName = (name: string) => `NonEmptyArray<${name}>`
 export const getMaybeArrayName = (name: string) => `MaybeArray<${name}>`
 
 /**
- * @since 0.2.0 
+ * @since 0.2.0
  */
-export function printMethod(indent: number, isInput: boolean) {
+export function printMethod(option: BuildOption) {
     return (input: MMethod) => {
-        const { type, name,  params=[], returnVoid }=input;
-        const typename = getTypeName(indent, isInput)(type);
-    
-        const _type = returnVoid === true ? `void` : typename;
+        const { indent, showDesc } = option
+        const { type, name, params = [], returnVoid } = input
+        const typename = getTypeName(option)(type)
+
+        const _type = returnVoid === true ? `void` : typename
         return formatBlock({
-            begin: formatItem(0)({
+            begin: formatItem(0, showDesc)({
                 content: `${name}:(`,
-                docs:input
+                docs: input
             }),
             end: `) => ${_type}`,
             indent: indent,
-            content: params.map(printField(indent + 1, isInput, ','))
+            content: params.map(printField({ indent: indent + 1, ...option, end: ',' }))
         })
     }
 }
@@ -157,48 +165,50 @@ export function printMethod(indent: number, isInput: boolean) {
  * @example
  * const a=['A','B']
  * expect(getImplementsName(a)).toEquals(' extends A,B')
- * 
- * @since 0.2.0 
+ *
+ * @since 0.2.0
  */
-const getImplementsName = (as: string[]): string => {
+const getImplementsName = (as: Array<string>): string => {
     return as.length === 0 ?
         '' :
         `extends ${as.join(', ')} `
 }
 /**
- * @since 0.2.0 
+ * @since 0.2.0
  */
-export function printInterface(indent: number, isInput: boolean) {
+export function printInterface(option: BuildOption) {
     return (param: MInterface) => {
-        const { fields = [], methods = [], name,  implements: impl = [] }=param
-    
-        //required is ture when id is ture
+        const { indent, showDesc } = option
+        const { fields = [], methods = [], name, implements: impl = [] } = param
+
+        // required is ture when id is ture
         const rfields = fields.map(a => ({
             ...a,
             required: a.id ? a.id : a.required
         }))
 
         return formatBlock({
-            begin: formatItem(indent)({
+            begin: formatItem(indent, showDesc)({
                 content: `export interface ${name} ${getImplementsName(impl)}{`,
-                docs:param,
+                docs: param
             }),
             end: '}',
             indent: indent,
-            content: rfields.map(printField(indent + 1, isInput)).concat(methods.map(printMethod(indent + 1, isInput)))
+            content: rfields.map(printField({ indent: indent + 1, ...option })).concat(
+                methods.map(printMethod({ indent: indent + 1, ...option })))
         })
     }
 }
 /**
- * @since 0.2.0 
+ * @since 0.2.0
  */
-export function printTypeAlias(indent: number, isInput: boolean) {
+export function printTypeAlias(option: BuildOption) {
     return (typeAlias: MTypeAlias) => {
-        const { fields = [], methods = [], name,  } = typeAlias
-        const { required, content } = printTypeReference(indent, isInput)(typeAlias)
-        const fieldContent = fields.map(printField(indent + 1, isInput));
-        const methodContent = methods.map(printMethod(indent + 1, isInput))
-
+        const { indent, showDesc } = option
+        const { fields = [], methods = [], name } = typeAlias
+        const { required, content } = printTypeReference(option)(typeAlias)
+        const fieldContent = fields.map(printField({ indent: indent + 1, ...option }))
+        const methodContent = methods.map(printMethod({ indent: indent + 1, ...option }))
 
         const body = (fields.length > 0 || methodContent.length > 0)
             ? O.some(formatBlock({
@@ -207,72 +217,71 @@ export function printTypeAlias(indent: number, isInput: boolean) {
                 indent: indent,
                 content: fieldContent.concat(methodContent)
             }))
-            : O.none;
+            : O.none
         const pcontent = pipe(
             body,
-            O.map(a => intersection(indent)([a, content])),
+            O.map(a => intersection(option)([a, content])),
             O.getOrElse(() => content)
         )
         // const pcontent = intersection(indent)([body, content])
-        return formatItem(indent)({
+        return formatItem(indent, showDesc)({
             content: `export type ${printNameBodyType({ name, required, content: pcontent, end: '' })}`,
-            docs:typeAlias
+            docs: typeAlias
         })
 
     }
 }
 
 /**
- * @since 0.2.0 
+ * @since 0.2.0
  */
-export function printSchema(indent: number, isInput: boolean) {
+export function printSchema(option: BuildOption) {
     return (input: MModule) => {
-      const  {  interfaces, typealiases }=input;
+        const { indent, showDesc } = option
+        const { interfaces, typealiases } = input
         return formatBlock({
-            begin: formatItem(indent)({
+            begin: formatItem(indent, showDesc)({
                 content: ``,
-                docs:input
+                docs: input
             }),
 
             end: '',
             indent: indent,
             content: [
 
-                ...typealiases.map(printTypeAlias(indent, isInput)),
-                ...interfaces.map(printInterface(indent, isInput)),
+                ...typealiases.map(printTypeAlias(option)),
+                ...interfaces.map(printInterface(option))
             ]
 
         })
     }
 }
 
-
 /**
  * TSBuild instance
- * @since 0.2.0 
+ * @since 0.2.0
  */
 export const buildTs: TSBuild = (option = {}) => (schema) => {
-    const { header = headerTS, imports = importsTS, isInput = false } = option
-
-
+    const { header = headerTS, imports = importsTS, showDesc } = option
 
     const indent = 0
-    return formatBlock({
-        begin: formatItem(indent)({
+    const content = formatBlock({
+        begin: formatItem(indent, showDesc)({
             content: fold(imports),
             docs: {
-                description:header,
-                deprecated:false,
-                ignore:false,
-                examples:[],
-                reason:[],
-                path:[]
+                description: header,
+                deprecated: false,
+                ignore: false,
+                examples: [],
+                reason: [],
+                path: []
 
             }
         }),
         end: '',
         indent,
-        content: [printSchema(indent, isInput)(schema)]
+        content: [printSchema({ indent, ...option })(schema)]
     })
+    return MN.right(format({parser:'typescript',content}))
 }
 export default buildTs

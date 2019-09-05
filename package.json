@@ -1,6 +1,6 @@
 {
   "name": "macoolka-type-model",
-  "version": "0.5.0",
+  "version": "0.2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -13,26 +13,48 @@
     "lint": "tslint -p tsconfig.json",
     "lint:fix": "tslint -p tsconfig.json --fix",
     "test": "jest",
-    "test:watch": "jest --config jest.config.json --watch ./src",
     "build": "rm -rf lib/ && tsc ",
-    "gen": "prisma generate",
     "precommit": "npm run lint",
     "prepush": "npm run test",
-    "coverage": "rimraf coverage && jest --config jest.config.json --coverage",
-    "dtslint": "dtslint dtslint"
+    "all": "npm run clean && tsc && jest  --coverage && tslint -p tsconfig.json",
+    "coverage": "rimraf coverage && jest  --coverage"
   },
   "dependencies": {
     "fp-ts": "^2.0.2",
     "io-ts": "^2.0.1",
     "macoolka-algorithms": "^0.2.0",
-    "macoolka-io": "^0.2.0"
+    "macoolka-app": "^0.2.2",
+    "macoolka-collection": "^0.2.0",
+    "macoolka-i18n": "^0.2.0",
+    "macoolka-io": "^0.2.1",
+    "macoolka-object": "^0.2.1",
+    "macoolka-predicate": "^0.2.1",
+    "macoolka-prettier": "^0.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "@types/prettier": "^1.18.2",
+    "jest": "^24.9.0",
+    "jest-cli": "^24.9.0",
+    "macoolka-typescript": "^0.2.1",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.6.2"
+  },
   "jest": {
     "moduleFileExtensions": [
       "ts",
       "tsx",
       "js"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,tsx,ts}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
@@ -41,8 +63,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/macoolka/macoolka-fp.git"
+    "url": "https://github.com/macoolka/macoolka-type-model.git"
   },
+  "homepage": "https://github.com/macoolka/macoolka-type-model",
   "keywords": [
     "macoolka",
     "typescript",

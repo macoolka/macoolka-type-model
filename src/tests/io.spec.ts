@@ -2,8 +2,22 @@ import * as t from '../io'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { InputModule as I } from '../types'
 import * as E from 'fp-ts/lib/Either'
+import BasicA from './fixtures/BasicA'
 type InputModule=I.MModule
+const en={i18n:{locale:'en'}}
+const zh={i18n:{locale:'zh'}}
 describe('io', () => {
+    it('decode ok', () => {
+        
+        pipe(
+            t.Module([]).decode(BasicA),
+            t.mapI18N,
+            E.mapLeft(a=>{
+                console.log(a({}))
+            }),
+            result => expect(E.isRight(result)).toBeTruthy()
+        )
+    })
     describe('validateId', () => {
         it('validateId ok', () => {
             const schema: InputModule = {
@@ -22,7 +36,7 @@ describe('io', () => {
                 }]
             }
             pipe(
-                t.Module.decode(schema),
+                t.Module([]).decode(schema),
                 result => expect(E.isRight(result)).toBeTruthy()
             )
         })
@@ -45,33 +59,23 @@ describe('io', () => {
 
             }
             pipe(
-                t.Module.decode({ ...schema, idUnique: false }),
+                t.Module([]).decode({ ...schema, idUnique: false }),
                 result => expect(E.isRight(result)).toEqual(true)
             )
             pipe(
-                t.Module.decode(schema),
-
+                t.Module([]).decode(schema),
+                t.mapI18N,
                 result => {
                     expect(E.isLeft(result)).toEqual(true)
                     return result;
                 },
                 E.mapLeft(a => {
-                    expect(t.show(a)({})).toMatchSnapshot()
+                    expect(a(en)).toMatchSnapshot()
+                    expect(a(zh)).toMatchSnapshot()
                 })
 
             )
-            pipe(
-                t.Module.decode(schema),
-
-                result => {
-                    expect(E.isLeft(result)).toEqual(true)
-                    return result;
-                },
-                E.mapLeft(a => {
-                    expect(t.show(a)({locale:'zh'})).toMatchSnapshot()
-                })
-
-            )
+           
 
         })
         it('validateId empty', () => {
@@ -92,17 +96,14 @@ describe('io', () => {
 
             }
             pipe(
-                t.Module.decode(schema),
+                t.Module([]).decode(schema),
+                t.mapI18N,
                 E.mapLeft(as => {
-                    expect(t.show(as)({})).toMatchSnapshot()
+                    expect(as(en)).toMatchSnapshot()
+                    expect(as(zh)).toMatchSnapshot()
                 })
             )
-            pipe(
-                t.Module.decode(schema),
-                E.mapLeft(as => {
-                    expect(t.show(as)({ locale: 'zh' })).toMatchSnapshot()
-                })
-            )
+          
         })
     })
     describe('validate field name', () => {
@@ -124,7 +125,7 @@ describe('io', () => {
 
             }
             pipe(
-                t.Module.decode(schema),
+                t.Module([]).decode(schema),
                 result => expect(E.isRight(result)).toBeTruthy()
             )
 
@@ -147,17 +148,14 @@ describe('io', () => {
 
             }
             pipe(
-                t.Module.decode(schema),
+                t.Module([]).decode(schema),
+                t.mapI18N,
                 E.mapLeft(as => {
-                    expect(t.show(as)()).toMatchSnapshot()
+                    expect(as(en)).toMatchSnapshot()
+                    expect(as(zh)).toMatchSnapshot()
                 })
             )
-            pipe(
-                t.Module.decode(schema),
-                E.mapLeft(as => {
-                    expect(t.show(as)({ locale: 'zh' })).toMatchSnapshot()
-                })
-            )
+           
 
         })
 
@@ -196,7 +194,7 @@ describe('io', () => {
 
             }
             pipe(
-                t.Module.decode(schema),
+                t.Module([]).decode(schema),
 
                 result => expect(E.isRight(result)).toBeTruthy()
             )
@@ -246,7 +244,7 @@ describe('io', () => {
 
             }
             pipe(
-                t.Module.decode(schema),
+                t.Module([]).decode(schema),
 
                 result => expect(E.isRight(result)).toBeTruthy()
             )
@@ -259,25 +257,17 @@ describe('io', () => {
         pipe(
             {},
             t.MInterface.decode,
+            t.mapI18N,
             result => {
                 expect(E.isLeft(result)).toBeTruthy();
                 return result;
             },
             E.mapLeft(as => {
-                expect(t.show(as)()).toMatchSnapshot()
+                expect(as(en)).toMatchSnapshot()
+                expect(as(zh)).toMatchSnapshot()
             })
         )
-        pipe(
-            {},
-            t.MInterface.decode,
-            result => {
-                expect(E.isLeft(result)).toBeTruthy();
-                return result;
-            },
-            E.mapLeft(as => {
-                expect(t.show(as)({ locale: 'zh' })).toMatchSnapshot()
-            })
-        )
+       
     })
     it('interface ok', () => {
         pipe(

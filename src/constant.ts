@@ -9,5 +9,3 @@ export type MaybeArray<A> = A | Array<A>
 `
 
 ]
-
-

@@ -1,69 +1,74 @@
+/**
+ * Validate Module
+ * @desczh
+ * 校验Module
+ * @file
+ */
 import { pipe } from 'fp-ts/lib/pipeable'
-import { array } from 'macoolka-collection'
+import { array as A } from 'macoolka-collection'
 import { MInterface, MModule } from '../models/Module'
-import * as E from 'fp-ts/lib/Either'
 import { showString } from 'fp-ts/lib/Show'
-import { Message } from '../i18n'
+import { idNotFound, idRepeat, fieldNameRepeat } from '../i18n'
 import { buildGraph } from '../graph'
-import { of, Validate,Parser } from 'macoolka-fp/lib/Parser'
-const parseInterface = of<MInterface, Message>()
-/**
- * @since 1.0.0
- */
-export type Validation<A> = Validate<A, Message>
-export type ValidationResult<A>=Parser<A,Message>
+
+import * as MF from 'macoolka-app/lib/MonadFunctionSync'
+import * as MN from 'macoolka-app/lib/MonadNodeSync'
 
 /**
- * @since 1.0.0
+ * Validate field id in interface
+ * @desczh
+ * 校验interface中id的规则
+ * @since 0.2.0
  */
 
-export const validateId: Validate<MInterface, Message> = (a) => {
+export const validateId: MF.MonadFunctionSync<MInterface, MInterface> = (a) => {
     const idNames = pipe(
         a.fields,
-        array.filter(a => a.id === true),
-        array.map(a => a.name)
+        A.filter(a => a.id === true),
+        A.map(a => a.name)
     )
+
     return idNames.length === 0
-        ? parseInterface.ko({
-            id: 'macoolka.data-model.idNotFound',
-            value: { model: a.name, name: '' }
-        })
+        ? MN.left(idNotFound({ model: a.name, name: '' }))
         : idNames.length > 1
-            ? parseInterface.ko({
-                id: 'macoolka.data-model.idRepeat',
-                value: { model: a.name, name: idNames.join(',') }
-            })
-            : parseInterface.ok(a)
+            ? MN.left(idRepeat({ model: a.name, name: idNames.join(',') }))
+            : MN.right(a)
 
 }
-export const validateFieldName: Validate<MInterface, Message> = (a) => {
+/**
+ * Validate field id in interface
+ * @desczh
+ * 校验interface中字段名称的规则
+ * @since 0.2.0
+ */
+export const validateFieldName: MF.MonadFunctionSync<MInterface, MInterface> = (a) => {
     const fieldNames = pipe(
         a.fields,
-        array.groupBy({
+        A.groupBy({
             getValue: a => a.name,
             show: showString
         }),
         Object.entries,
-        array.filter(([_, values]) => values.length > 1),
-        array.map(([key]) => key)
+        A.filter(([_, values]) => values.length > 1),
+        A.map(([key]) => key)
     )
     return fieldNames.length > 0
-        ? parseInterface.ko(
-            {
-                id: 'macoolka.data-model.fieldNameRepeat',
-                value: { model: a.name, name: fieldNames.map(showString.show).join(',') }
-            })
-        : parseInterface.ok(a)
+        ? MN.left(fieldNameRepeat({ model: a.name, name: fieldNames.map(showString.show).join(',') }))
+        : MN.right(a)
 
 }
-export const validateModelName: Validate<MModule, Message> = (a) => {
+/**
+ * Validate name rule in module
+ * @desczh
+ * 校验Module中名称的规则
+ * @since 0.2.0
+ */
+export const validateModelName = (ignoreNames: Array<string>): MF.MonadFunctionSync<MModule, MModule> => (a) => {
     return pipe(
         a,
-        buildGraph,
-        E.map(() => {
+        buildGraph(ignoreNames),
+        MN.map(_ => {
             return a
         })
     )
-
-
 }

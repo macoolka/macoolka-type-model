@@ -10,20 +10,18 @@ const a: InputModule.MModule = {
                 _kind: 'string',
                 defaultValue: 'all',
                 isArray: true,
-                isArrayRequired: true,
+                isArrayRequired: true
             },
-            required: true,
- 
+            required: true
 
         }, {
             name: 'requireAndArray',
             type: {
                 _kind: 'number',
                 defaultValue: 1,
-                isArray: true,
+                isArray: true
             },
-            required: true,
-        
+            required: true
 
         }, {
             name: 'isArrayRequiredAndArray',
@@ -31,60 +29,58 @@ const a: InputModule.MModule = {
                 _kind: 'number',
                 defaultValue: 2,
                 isArrayRequired: true,
-                isArray: true,
-            },
-          
+                isArray: true
+            }
 
         }, {
             name: 'RequiredAndisArrayRequired',
             type: {
                 _kind: 'number',
                 defaultValue: 3,
-                isArrayRequired: true,
+                isArrayRequired: true
             },
-            required: true,
-         
+            required: true
 
         }, {
             name: 'array',
             type: {
                 _kind: 'number',
                 defaultValue: 4,
-                isArray: true,
-            },
-           
+                isArray: true
+            }
+
         }, {
             name: 'isArrayRequired',
             type: {
                 _kind: 'number',
                 defaultValue: 5,
-                isArrayRequired: true,
-            },
-         
+                isArrayRequired: true
+            }
+
         }, {
             name: 'require',
             type: {
                 _kind: 'datetime',
                 defaultValue: 'now'
             },
-            required: true,
+            required: true
         }, {
             name: 'empty',
             type: {
                 _kind: 'number',
                 defaultValue: 7
-            },
+            }
         }]
     }],
     typealiases: [{
         name: 'City',
-        type:{
-            _kind:'enum',
-            values: ['A', 'B', 'C'],
-            
+        type: {
+            _kind: 'enum',
+            values: ['A', 'B', 'C']
+
         },
-        required:true,
-       
+        required: true
+
     }]
 
 }

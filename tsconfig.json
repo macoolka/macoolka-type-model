@@ -30,7 +30,7 @@
   ],
   "exclude": [
     "node_modules",
-    "src/tests",
+    "src/**/tests/*",
     "src/**/*.spec.*",
     "src/**/*.spec.*",
     "src/**/*.test.*"

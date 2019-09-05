@@ -1,4 +1,4 @@
-import { buildGraph, createVis,topologicalSort } from '../graph'
+import { buildGraph, createVis, } from '../graph'
 import Basic from './fixtures/Basic'
 import schema from '../schema'
 import * as E from 'fp-ts/lib/Either'
@@ -10,14 +10,14 @@ describe('graph', () => {
     it('build Schema Graph', () => {
         pipe(
             schema,
-            Module.decode,
+            Module([]).decode,
             as => {
                 expect(E.isRight(as)).toBeTruthy();
                 return as;
             },
             E.map(a =>
                 pipe(
-                    buildGraph(a),
+                    buildGraph([])(a),
                     as => {
                         expect(E.isRight(as)).toBeTruthy();
                         
@@ -35,43 +35,18 @@ describe('graph', () => {
             )
         )
     })
-    it('buildGraph', () => {
-        pipe(
-            schema,
-            Module.decode,
-          
-            as => {
-                expect(E.isRight(as)).toBeTruthy();
-                return as;
-            },
-            E.map(a=>{
-                pipe(
-                    a,
-                    topologicalSort,
-                    as => {
-                        expect(E.isRight(as)).toBeTruthy();
-                        return as;
-                    },
-                    E.map(a=>{
-                        writeFileSync(__dirname + '/schema.names.json', JSON.stringify(a.map(b=>b.name)))
-                    })
-                    
-                )
-            }),
-           
-        )
-    })
+   
     it('buildGraph', () => {
         pipe(
             Basic,
-            Module.decode,
+            Module([]).decode,
             as => {
                 expect(E.isRight(as)).toBeTruthy();
                 return as;
             },
             E.map(a =>
                 pipe(
-                    buildGraph(a),
+                    buildGraph([])(a),
                     as => {
                         expect(E.isRight(as)).toBeTruthy();
                         return as;

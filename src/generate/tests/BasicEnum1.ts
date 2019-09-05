@@ -10,5 +10,3 @@ export type JSONDATA = Record<string,any>
 
 export type City = 'A' | 'B' | 'C'
 export type Empty = never
-
-

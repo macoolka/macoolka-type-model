@@ -1,7 +1,7 @@
 {
     "macoolka.data-model.idRepeat": "Id[{name}] repeat in Model[{model}].",
     "macoolka.data-model.idNotFound": "Id not found {name} in {model}",
-    "macoolka.data-model.fieldNameRepeat": "Field nname [{name}] repeat in Model[{model}].",
+    "macoolka.data-model.fieldNameRepeat": "Field name [{name}] repeat in Model[{model}].",
     "macoolka.data-model.typeNameRepeat": "Type name [{name}] repeat in Model[{model}].",
     "macoolka.data-model.typeNotFound": "Type  [{name}] not be found in Model[{model}].",
     "macoolka.data-model.MNameable": "nameable",

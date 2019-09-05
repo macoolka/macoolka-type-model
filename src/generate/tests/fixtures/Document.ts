@@ -1,32 +1,32 @@
 import { InputModule } from '../../../types'
 const DocumentSchema: InputModule.MModule = {
     name: 'Document',
-    idUnique:false,
+    idUnique: false,
     interfaces: [{
         name: 'Documentable',
         fields: [{
             name: 'name',
-           
-            required: true,
+
+            required: true
         }, {
             name: 'description',
-            type: 'string',
+            type: 'string'
         }, {
             name: 'since',
             type: 'string',
-            required: true,
+            required: true
         }, {
             name: 'deprecated',
             type: 'boolean',
-            required: true,
+            required: true
         }, {
             name: 'examples',
             type: {
                _kind: 'boolean',
-               isArray: true,
+               isArray: true
             },
-            required: true,
-          
+            required: true
+
         }]
 
     }, {
@@ -35,8 +35,8 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
-        },
+            required: true
+        }
         ]
     }, {
         name: 'Func',
@@ -44,8 +44,8 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
-        },
+            required: true
+        }
         ]
     }, {
         name: 'Method',
@@ -53,8 +53,8 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
-        },
+            required: true
+        }
         ]
     }, {
         name: 'Class',
@@ -62,26 +62,26 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
+            required: true
         }, {
             name: 'methods',
             type: {
                 _kind: 'type',
                 value: 'Method',
-                isArray: true,
+                isArray: true
             },
-           
-            required: true,
+
+            required: true
 
         }, {
             name: 'staticMethods',
             type: {
                 _kind: 'type',
                 value: 'Method',
-                isArray: true,
+                isArray: true
             },
-          
-            required: true,
+
+            required: true
         }
         ]
     }, {
@@ -90,8 +90,8 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
-        },
+            required: true
+        }
         ]
     }, {
         name: 'Constant',
@@ -99,8 +99,8 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
-        },
+            required: true
+        }
         ]
     }, {
         name: 'Export',
@@ -108,93 +108,91 @@ const DocumentSchema: InputModule.MModule = {
         fields: [{
             name: 'signature',
             type: 'string',
-            required: true,
-        },
+            required: true
+        }
         ]
     }, {
         name: 'Module',
         fields: [{
             name: 'path',
             type: {
-                _kind:'string',
-                isArray: true,
+                _kind: 'string',
+                isArray: true
 
             },
-           
-            required: true,
+
+            required: true
         }, {
             name: 'description',
-            type: 'string',
+            type: 'string'
 
         }, {
             name: 'interfaces',
             type: {
                 _kind: 'type',
                 value: 'Interface',
-                isArray: true,
+                isArray: true
             },
-            required: true,
-           
+            required: true
+
         }, {
             name: 'typeAliases',
             type: {
                 _kind: 'type',
                 value: 'TypeAlias',
-                isArray: true,
+                isArray: true
             },
-            required: true,
-          
+            required: true
+
         }, {
             name: 'functions',
             type: {
                 _kind: 'type',
                 value: 'Func',
-                isArray: true,
+                isArray: true
             },
-            required: true,
-            
+            required: true
+
         }, {
             name: 'classes',
             type: {
                 _kind: 'type',
                 value: 'Class',
-                isArray: true,
+                isArray: true
             },
-            required: true,
-           
+            required: true
+
         }, {
             name: 'constants',
             type: {
                 _kind: 'type',
                 value: 'Constant',
-                isArray: true,
+                isArray: true
             },
-            required: true,
-           
+            required: true
+
         }, {
             name: 'exports',
             type: {
                 _kind: 'type',
                 value: 'Export',
-                isArray: true,
+                isArray: true
             },
-            required: true,
-          
+            required: true
+
         }, {
             name: 'deprecated',
             type: 'boolean',
-            required: true,
-        },
+            required: true
+        }
         ]
-    },]
+    }]
 }
-export default DocumentSchema;
+export default DocumentSchema
 /**
  * @since 0.2.0
  */
 export type Example = string
-
-
 
 /**
  * @since 0.2.0
@@ -207,16 +205,12 @@ export interface Documentable {
     readonly examples: Array<Example>
 }
 
-
-
 /**
  * @since 0.2.0
  */
 export interface Interface extends Documentable {
     signature: string
 }
-
-
 
 /**
  * @since 0.2.0
@@ -225,15 +219,12 @@ export interface Func extends Documentable {
     readonly signatures: Array<string>
 }
 
-
-
 /**
  * @since 0.2.0
  */
 export interface Method extends Documentable {
     readonly signatures: Array<string>
 }
-
 
 /**
  * @since 0.2.0
@@ -251,7 +242,6 @@ export interface TypeAlias extends Documentable {
     readonly signature: string
 }
 
-
 /**
  * @since 0.2.0
  */
@@ -259,14 +249,12 @@ export interface Constant extends Documentable {
     readonly signature: string
 }
 
-
 /**
  * @since 0.2.0
  */
 export interface Export extends Documentable {
     readonly signature: string
 }
-
 
 /**
  * @since 0.2.0

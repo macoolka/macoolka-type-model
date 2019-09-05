@@ -15,7 +15,7 @@ const a: InputModule.MModule = {
         name: 'T2',
         fields: [
             {
-                name: 'name2',
+                name: 'name2'
             }
         ]
     }, {
@@ -26,7 +26,7 @@ const a: InputModule.MModule = {
             returnVoid: true,
             params: [{
                 name: 'string',
-                required: true,
+                required: true
             }, {
                 name: 'number',
 
@@ -76,16 +76,16 @@ const a: InputModule.MModule = {
             }, {
                 name: 'typeUnion_kind',
                 type: { _kind: 'typeUnion', values: ['T1', 'T2'] }
-            },]
+            }]
         }
 
         ],
         fields: [{
             name: 'id',
-            id: true,
+            id: true
         }, {
             name: 'string',
-            required: true,
+            required: true
         }, {
             name: 'number',
             type: 'number'
@@ -134,7 +134,10 @@ const a: InputModule.MModule = {
         }, {
             name: 'typeUnion_kind',
             type: { _kind: 'typeUnion', values: ['T1', 'T2'] }
-        },]
+        },{
+            name: 'maybeArray',
+            type: { _kind: 'string', maybeArray: true }
+        }]
     }],
 
     typealiases: [{
@@ -143,7 +146,7 @@ const a: InputModule.MModule = {
             _kind: 'enum',
             values: ['A', 'B', 'C']
         },
-        required: true,
+        required: true
 
     }, {
         name: 'Empty',
@@ -151,7 +154,7 @@ const a: InputModule.MModule = {
             _kind: 'enum',
             values: []
         },
-        required: true,
+        required: true
     }]
 
 }

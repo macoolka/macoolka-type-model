@@ -1,26 +1,25 @@
 import { InputModule } from '../../../types'
 export const b: InputModule.MModule = {
     name: 'Basic',
-    idUnique:false,
+    idUnique: false,
     interfaces: [],
-    typealiases:[{
-        name:'City',
-        type:{
-            _kind:'enum',
-            values:['A','B','C']
+    typealiases: [{
+        name: 'City',
+        type: {
+            _kind: 'enum',
+            values: ['A','B','C']
         },
-        required:true,
-       
+        required: true
+
     },{
-        name:'Empty',
-        type:{
-            _kind:'enum',
-            values:[]
+        name: 'Empty',
+        type: {
+            _kind: 'enum',
+            values: []
         },
-        required:true,
+        required: true
     }
     ]
-   
 
 }
 export default b

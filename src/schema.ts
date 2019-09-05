@@ -26,16 +26,16 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'string',
-                    maxLength: 64,
+                    maxLength: 64
                 },
                 required: true,
                 unique: true,
-                id: true,
+                id: true
             }
 
             ]
         }, {
-            name: "MDocumentable",
+            name: 'MDocumentable',
             description: [
                 'Document Tags'
             ],
@@ -56,9 +56,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'description',
                 description: [
@@ -72,10 +72,10 @@ const schema: MModule = {
                 type: {
                     _kind: 'string',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
 
             }, {
                 name: 'ignore',
@@ -89,9 +89,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
 
             }, {
                 name: 'descriptions',
@@ -109,7 +109,7 @@ const schema: MModule = {
                 name: 'since',
                 type: {
                     _kind: 'string',
-                    defaultValue: '0.2.0',
+                    defaultValue: '0.2.0'
                 },
                 description: [
                     'When was this feature added.'
@@ -118,7 +118,7 @@ const schema: MModule = {
                     zh: [
                         '哪一个版本加入'
                     ]
-                },
+                }
 
             }, {
                 name: 'examples',
@@ -133,9 +133,9 @@ const schema: MModule = {
                 type: {
                     _kind: 'string',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
-                required: true,
+                required: true
             }, {
                 name: 'signature',
                 description: [
@@ -145,7 +145,7 @@ const schema: MModule = {
                     zh: [
                         '签名'
                     ]
-                },
+                }
             }, {
                 name: 'reason',
 
@@ -160,10 +160,10 @@ const schema: MModule = {
                 type: {
                     _kind: 'string',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
             }, {
                 name: 'path',
                 description: [
@@ -177,14 +177,14 @@ const schema: MModule = {
                 type: {
                     _kind: 'string',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
 
-            },]
+            }]
         }, {
-            name: "MExportable",
+            name: 'MExportable',
             description: [
                 'The Node can export on module'
             ],
@@ -205,9 +205,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: true,
+                    defaultValue: true
                 },
-                required: true,
+                required: true
             }]
         }, {
             name: 'MScalable',
@@ -232,9 +232,9 @@ const schema: MModule = {
                     },
                     type: {
                         _kind: 'boolean',
-                        defaultValue: false,
+                        defaultValue: false
                     },
-                    required: true,
+                    required: true
                 }, {
                     name: 'isArray',
                     description: [
@@ -247,9 +247,9 @@ const schema: MModule = {
                     },
                     type: {
                         _kind: 'boolean',
-                        defaultValue: false,
+                        defaultValue: false
                     },
-                    required: true,
+                    required: true
                 }, {
                     name: 'maybeArray',
                     description: [
@@ -262,9 +262,9 @@ const schema: MModule = {
                     },
                     type: {
                         _kind: 'boolean',
-                        defaultValue: false,
+                        defaultValue: false
                     },
-                    required: true,
+                    required: true
                 }, {
                     name: 'isArrayRequired',
                     description: [
@@ -277,9 +277,9 @@ const schema: MModule = {
                     },
                     type: {
                         _kind: 'boolean',
-                        defaultValue: false,
+                        defaultValue: false
                     },
-                    required: true,
+                    required: true
                 }, {
                     name: 'defaultEmptyArray',
                     description: [
@@ -292,10 +292,10 @@ const schema: MModule = {
                     },
                     type: {
                         _kind: 'boolean',
-                        defaultValue: true,
+                        defaultValue: true
                     },
-                    required: true,
-                },
+                    required: true
+                }
             ]
         }, {
             name: 'MEnumScalar',
@@ -324,9 +324,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'enum',
+                    value: 'enum'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'values',
                 description: [
@@ -339,9 +339,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'string',
-                    isArray: true,
+                    isArray: true
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -352,7 +352,7 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
+                }
             }
             ]
         }, {
@@ -378,9 +378,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'json',
+                    value: 'json'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 type: 'json',
@@ -392,7 +392,7 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
+                }
             }
             ]
         }, {
@@ -419,9 +419,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'string',
+                    value: 'string'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
 
@@ -433,39 +433,39 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
+                }
             }, {
                 name: 'minLength',
                 type: 'int',
                 description: [
-                    'The length of value must great than given value',
+                    'The length of value must great than given value'
                 ],
                 descriptions: {
                     zh: [
                         '字段的最小长度'
                     ]
-                },
+                }
             }, {
                 name: 'maxLength',
                 type: 'int',
                 description: [
-                    'The length of value must less than given value',
+                    'The length of value must less than given value'
                 ],
                 descriptions: {
                     zh: [
                         '字段的最大长度'
                     ]
-                },
+                }
             }, {
                 name: 'pattern',
                 description: [
-                    'The length value must match the given pattern',
+                    'The length value must match the given pattern'
                 ],
                 descriptions: {
                     zh: [
                         '字段必须匹配这个正则表达式'
                     ]
-                },
+                }
             }, {
                 name: 'format',
                 type: {
@@ -473,13 +473,13 @@ const schema: MModule = {
                     value: 'MStringFormat'
                 },
                 description: [
-                    'The value must match the given format',
+                    'The value must match the given format'
                 ],
                 descriptions: {
                     zh: [
                         '字段必须匹配指定的格式'
                     ]
-                },
+                }
             }]
         }, {
             name: 'MNumberScalar',
@@ -505,9 +505,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'number',
+                    value: 'number'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -521,29 +521,28 @@ const schema: MModule = {
                 },
                 type: 'number'
 
-
             }, {
                 name: 'maximum',
                 type: 'number',
                 description: [
-                    'The value must less than given value',
+                    'The value must less than given value'
                 ],
                 descriptions: {
                     zh: [
                         '字段的最大值'
                     ]
-                },
+                }
             }, {
                 name: 'minimum',
                 type: 'number',
                 description: [
-                    'The value must great than given value',
+                    'The value must great than given value'
                 ],
                 descriptions: {
                     zh: [
                         '字段的最小值'
                     ]
-                },
+                }
             }]
         }, {
             name: 'MIntScalar',
@@ -569,9 +568,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'int',
+                    value: 'int'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -589,25 +588,25 @@ const schema: MModule = {
                 name: 'maximum',
                 type: 'int',
                 description: [
-                    'The value must less than given value',
+                    'The value must less than given value'
                 ],
                 descriptions: {
                     zh: [
                         '字段的最大值'
                     ]
-                },
+                }
 
             }, {
                 name: 'minimum',
                 type: 'int',
                 description: [
-                    'The value must great than given value',
+                    'The value must great than given value'
                 ],
                 descriptions: {
                     zh: [
                         '字段的最小值'
                     ]
-                },
+                }
             }]
         }, {
             name: 'MBooleanScalar',
@@ -634,9 +633,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'boolean',
+                    value: 'boolean'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -649,7 +648,7 @@ const schema: MModule = {
                     ]
                 },
                 type: 'boolean'
-            },]
+            }]
         }, {
             name: 'MDateTimeScalar',
             implements: ['MScalable'],
@@ -674,9 +673,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'datetime',
+                    value: 'datetime'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -691,9 +690,9 @@ const schema: MModule = {
                 type: {
                     _kind: 'enum',
                     values: ['now']
-                },
+                }
 
-            },]
+            }]
         }, {
             name: 'MKindScalar',
             implements: ['MScalable'],
@@ -717,20 +716,20 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'kind',
+                    value: 'kind'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'value',
                 required: true,
                 description: [
-                    'kind value',
+                    'kind value'
                 ],
                 descriptions: {
                     zh: [
                         '标签值'
                     ]
-                },
+                }
             }, {
                 name: 'defaultValue',
                 description: [
@@ -741,7 +740,7 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
+                }
             }]
         }, {
             name: 'MTypeScalar',
@@ -766,10 +765,10 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'type',
+                    value: 'type'
 
                 },
-                required: true,
+                required: true
             }, {
                 name: 'value',
                 description: [
@@ -780,7 +779,7 @@ const schema: MModule = {
                         '类型名称'
                     ]
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -791,7 +790,7 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
+                }
             }]
         }, {
             name: 'MTypeUnionScalar',
@@ -816,10 +815,10 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'typeUnion',
+                    value: 'typeUnion'
 
                 },
-                required: true,
+                required: true
             }, {
                 name: 'values',
                 description: [
@@ -827,10 +826,10 @@ const schema: MModule = {
                 ],
                 type: {
                     _kind: 'string',
-                    isArray: true,
+                    isArray: true
 
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -841,8 +840,8 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
-            },]
+                }
+            }]
         }, {
             name: 'MTypeIntersectionScalar',
             implements: ['MScalable'],
@@ -866,10 +865,10 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'kind',
-                    value: 'typeIntersection',
+                    value: 'typeIntersection'
 
                 },
-                required: true,
+                required: true
             }, {
                 name: 'values',
                 description: [
@@ -877,11 +876,10 @@ const schema: MModule = {
                 ],
                 type: {
                     _kind: 'string',
-                    isArray: true,
-
+                    isArray: true
 
                 },
-                required: true,
+                required: true
             }, {
                 name: 'defaultValue',
                 description: [
@@ -892,12 +890,12 @@ const schema: MModule = {
                     zh: [
                         '缺省值'
                     ]
-                },
-            },]
+                }
+            }]
         }, {
             name: 'MValueable',
             description: [
-                'The define a scalar ref',
+                'The define a scalar ref'
              ],
             descriptions: {
                 zh: [
@@ -933,16 +931,16 @@ const schema: MModule = {
                     },
                     type: {
                         _kind: 'boolean',
-                        defaultValue: false,
+                        defaultValue: false
                     },
-                    required: true,
+                    required: true
                 }
             ]
         }, {
             name: 'MVariable',
             description: [
                 ` Represents a field in the datamodel.`,
-                'ModelField is referenced by its name and is either scalar or a relation field.',
+                'ModelField is referenced by its name and is either scalar or a relation field.'
             ],
             descriptions: {
                 zh: [
@@ -955,7 +953,7 @@ const schema: MModule = {
             name: 'MField',
             description: [
                 ` Represents a field in the datamodel.`,
-                'Field is referenced by its name and is either scalar or a relation field.',
+                'Field is referenced by its name and is either scalar or a relation field.'
             ],
             descriptions: {
                 zh: [
@@ -970,7 +968,7 @@ const schema: MModule = {
                     value: 'field',
                     defaultValue: 'field'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'unique',
 
@@ -984,9 +982,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
 
             }, {
                 name: 'id',
@@ -1000,9 +998,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'readonly',
                 description: [
@@ -1015,9 +1013,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'order',
                 description: [
@@ -1030,9 +1028,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: true,
+                    defaultValue: true
                 },
-                required: true,
+                required: true
             }, {
                 name: 'exclusiveCreate',
                 description: [
@@ -1045,9 +1043,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'exclusiveUpdate',
                 description: [
@@ -1060,9 +1058,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'exclusiveWhere',
                 description: [
@@ -1075,9 +1073,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'exclusiveSearch',
                 description: [
@@ -1090,9 +1088,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: 'exclusiveLoad',
                 description: [
@@ -1105,15 +1103,15 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
-            },]
+                required: true
+            }]
         }, {
             name: 'MParam',
             implements: ['MVariable'],
             description: [
-                'Param is used by method.',
+                'Param is used by method.'
             ],
             descriptions: {
                 zh: [
@@ -1127,12 +1125,12 @@ const schema: MModule = {
                     value: 'param',
                     defaultValue: 'param'
                 },
-                required: true,
-            },]
+                required: true
+            }]
         }, {
             name: 'MFunctional',
             description: [
-                'The define a basic function.',
+                'The define a basic function.'
             ],
             descriptions: {
                 zh: [
@@ -1154,7 +1152,7 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MParam',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
@@ -1170,14 +1168,14 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
-            },]
+                required: true
+            }]
         }, {
             name: 'MMethod',
             description: [
-                'The define a method.',
+                'The define a method.'
 
             ],
 
@@ -1194,12 +1192,12 @@ const schema: MModule = {
                     value: 'method',
                     defaultValue: 'method'
                 },
-                required: true,
-            },]
+                required: true
+            }]
         }, {
             name: 'MStaticMethod',
             description: [
-                'The define a static method.',
+                'The define a static method.'
 
             ],
 
@@ -1217,12 +1215,12 @@ const schema: MModule = {
                     value: 'staticmethod',
                     defaultValue: 'staticmethod'
                 },
-                required: true,
+                required: true
             }]
         }, {
             name: 'MFunction',
             description: [
-                'The define a function.',
+                'The define a function.'
             ],
 
             descriptions: {
@@ -1238,15 +1236,15 @@ const schema: MModule = {
                         value: 'function',
                         defaultValue: 'function'
                     },
-                    required: true,
-                },
+                    required: true
+                }
             ],
-            implements: ['MFunctional', 'MExportable',],
+            implements: ['MFunctional', 'MExportable']
 
         }, {
             name: 'MConstant',
             description: [
-                'The define a constant.',
+                'The define a constant.'
             ],
 
             descriptions: {
@@ -1262,15 +1260,15 @@ const schema: MModule = {
                         value: 'constant',
                         defaultValue: 'constant'
                     },
-                    required: true,
-                },
+                    required: true
+                }
             ],
-            implements: ['MVariable', 'MExportable',],
+            implements: ['MVariable', 'MExportable']
 
         }, {
             name: 'MExport',
             description: [
-                'The define a export.',
+                'The define a export.'
 
             ],
 
@@ -1287,13 +1285,13 @@ const schema: MModule = {
                     value: 'export',
                     defaultValue: 'export'
                 },
-                required: true,
-            },]
+                required: true
+            }]
         }, {
             name: 'MTypeable',
             implements: ['MDocumentable', 'MExportable', 'MNameable'],
             description: [
-                'MTypeable consist of multiple fields and multiple methods',
+                'MTypeable consist of multiple fields and multiple methods'
             ],
 
             descriptions: {
@@ -1305,7 +1303,7 @@ const schema: MModule = {
             fields: [{
                 name: 'fields',
                 description: [
-                    'The define fields on the type.',
+                    'The define fields on the type.'
                 ],
 
                 descriptions: {
@@ -1317,15 +1315,15 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MField',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
 
             }, {
                 name: 'methods',
                 description: [
-                    'The define methods on the type.',
+                    'The define methods on the type.'
                 ],
 
                 descriptions: {
@@ -1337,16 +1335,16 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MMethod',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
 
                 },
 
-                required: true,
+                required: true
             }]
         }, {
             name: 'MInterface',
             description: [
-                'The Define a interface',
+                'The Define a interface'
             ],
 
             descriptions: {
@@ -1358,7 +1356,7 @@ const schema: MModule = {
             fields: [{
                 name: '_kind',
                 description: [
-                    'kind',
+                    'kind'
                 ],
 
                 descriptions: {
@@ -1371,11 +1369,11 @@ const schema: MModule = {
                     value: 'interface',
                     defaultValue: 'interface'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'implements',
                 description: [
-                    'The names be  implemented by the interface',
+                    'The names be  implemented by the interface'
                 ],
 
                 descriptions: {
@@ -1386,15 +1384,15 @@ const schema: MModule = {
                 type: {
                     _kind: 'string',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
             }]
         }, {
             name: 'MClass',
             description: [
-                'The Define a Class',
+                'The Define a Class'
             ],
 
             descriptions: {
@@ -1411,11 +1409,11 @@ const schema: MModule = {
                     value: 'class',
                     defaultValue: 'class'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'implements',
                 description: [
-                    'The names be  implemented by the interface',
+                    'The names be  implemented by the interface'
                 ],
 
                 descriptions: {
@@ -1426,14 +1424,14 @@ const schema: MModule = {
                 type: {
                     _kind: 'string',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
             }, {
                 name: 'staticMethods',
                 description: [
-                    'Static Method Array',
+                    'Static Method Array'
                 ],
 
                 descriptions: {
@@ -1445,16 +1443,16 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MStaticMethod',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
-                required: true,
+                required: true
             }]
         }, {
             name: 'MTypeAlias',
             implements: ['MTypeable', 'MValueable'],
             description: [
-                'The Define a Type alias',
+                'The Define a Type alias'
             ],
 
             descriptions: {
@@ -1469,13 +1467,13 @@ const schema: MModule = {
                     value: 'typealias',
                     defaultValue: 'typealias'
                 },
-                required: true,
+                required: true
             }]
         }, {
             name: 'MModule',
 
             description: [
-                'The Define a Module',
+                'The Define a Module'
             ],
 
             descriptions: {
@@ -1487,7 +1485,7 @@ const schema: MModule = {
             fields: [{
                 name: 'file',
                 description: [
-                    'True mean The module will generate doc',
+                    'True mean The module will generate doc'
                 ],
 
                 descriptions: {
@@ -1497,9 +1495,9 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }, {
                 name: '_kind',
                 type: {
@@ -1507,11 +1505,11 @@ const schema: MModule = {
                     value: 'module',
                     defaultValue: 'module'
                 },
-                required: true,
+                required: true
             }, {
                 name: 'interfaces',
                 description: [
-                    'interfaces',
+                    'interfaces'
                 ],
 
                 descriptions: {
@@ -1523,14 +1521,14 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MInterface',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
             }, {
                 name: 'typealiases',
                 description: [
-                    'type aliases',
+                    'type aliases'
                 ],
 
                 descriptions: {
@@ -1542,14 +1540,14 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MTypeAlias',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
             }, {
                 name: 'classes',
                 description: [
-                    'classes',
+                    'classes'
                 ],
 
                 descriptions: {
@@ -1561,14 +1559,14 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MClass',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
             }, {
                 name: 'functions',
                 description: [
-                    'functions',
+                    'functions'
                 ],
 
                 descriptions: {
@@ -1580,14 +1578,14 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MFunction',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
             }, {
                 name: 'exports',
                 description: [
-                    'export',
+                    'export'
                 ],
 
                 descriptions: {
@@ -1599,14 +1597,14 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MExport',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
             }, {
                 name: 'constants',
                 description: [
-                    'constants',
+                    'constants'
                 ],
 
                 descriptions: {
@@ -1618,14 +1616,14 @@ const schema: MModule = {
                     _kind: 'type',
                     value: 'MConstant',
                     isArray: true,
-                    defaultEmptyArray: true,
+                    defaultEmptyArray: true
                 },
 
                 required: true
             }, {
                 name: 'idUnique',
                 description: [
-                    'Id field only one',
+                    'Id field only one'
                 ],
 
                 descriptions: {
@@ -1635,15 +1633,15 @@ const schema: MModule = {
                 },
                 type: {
                     _kind: 'boolean',
-                    defaultValue: false,
+                    defaultValue: false
                 },
-                required: true,
+                required: true
             }]
         }],
     typealiases: [{
         name: 'MBasicScalar',
         description: [
-            'basic scalar',
+            'basic scalar'
         ],
 
         descriptions: {
@@ -1655,11 +1653,11 @@ const schema: MModule = {
         type: {
             _kind: 'enum',
             values: ['string', 'number', 'boolean', 'int', 'datetime', 'json']
-        },
+        }
     }, {
         name: 'MStringFormat',
         description: [
-            'Sring Format',
+            'Sring Format'
         ],
 
         descriptions: {
@@ -1671,12 +1669,12 @@ const schema: MModule = {
         type: {
             _kind: 'enum',
             values: ['UUID', 'EMail', 'IPV4', 'IPV6', 'URL']
-        },
+        }
     }, {
         name: 'MIdentifierKind',
         required: true,
         description: [
-            'type kind',
+            'type kind'
         ],
 
         descriptions: {
@@ -1688,12 +1686,12 @@ const schema: MModule = {
             _kind: 'enum',
             values: ['field', 'typealias', 'interface', 'class', 'export', 'function', 'param',
                 'constant', 'module', 'method', 'staticmethod']
-        },
+        }
     },{
         name: 'MScalars',
         required: true,
         description: [
-            'Scalar',
+            'Scalar'
         ],
 
         descriptions: {
@@ -1704,8 +1702,8 @@ const schema: MModule = {
         type: {
             _kind: 'typeUnion',
             values: ['MEnumScalar', 'MStringScalar', 'MNumberScalar', 'MIntScalar', 'MBooleanScalar', 'MJsonScalar',
-            'MDateTimeScalar', 'MKindScalar', 'MTypeScalar', 'MTypeUnionScalar', 'MTypeIntersectionScalar', ]
-        },
+            'MDateTimeScalar', 'MKindScalar', 'MTypeScalar', 'MTypeUnionScalar', 'MTypeIntersectionScalar' ]
+        }
     }]
 } as MModule
 export default schema

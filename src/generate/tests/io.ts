@@ -3,43 +3,49 @@
  */
 import * as t from 'macoolka-io'
 /**
- * The define  basic info for scalar 
+ * The define  basic info for scalar
  * @desczh
  * 定义一个标量的基本信息
+ * @since 0.2.0
  */
-export const MScalable =t.type({
+export const MScalable = t.type({
   /**
-   * The Node can be marked as undefined. 
+   * The Node can be marked as undefined.
    * @desczh
    * 可能为空
+   * @since 0.2.0
    */
-  maybe:t.withDefault(t.boolean,false),
+  maybe: t.withDefault(t.boolean, false),
   /**
    * The field has the many multiplicity will also be marked.
    * @desczh
    * 是否是数组
+   * @since 0.2.0
    */
-  isArray:t.withDefault(t.boolean,false),
+  isArray: t.withDefault(t.boolean, false),
   /**
    * The field is T | Array<T>.
    * @desczh
    * T | Array<T>
+   * @since 0.2.0
    */
-  maybeArray:t.withDefault(t.boolean,false),
+  maybeArray: t.withDefault(t.boolean, false),
   /**
    * The means that no item in the list can be null
    * @desczh
    * 非空数组
+   * @since 0.2.0
    */
-  isArrayRequired:t.withDefault(t.boolean,false),
+  isArrayRequired: t.withDefault(t.boolean, false),
   /**
    * The means that defaultValue is []
    * @desczh
    * 缺省值为[]
+   * @since 0.2.0
    */
-  defaultEmptyArray:t.withDefault(t.boolean,true),
+  defaultEmptyArray: t.withDefault(t.boolean, true)
 })
- 
+
 /**
  * Like a Boolean an Enum can have one of a predefined set of values.
  * The difference is that you can define the possible values
@@ -48,189 +54,244 @@ export const MScalable =t.type({
  * by creating an Enum with the possible values COMPACT, WIDE and COVER.
  * @desczh
  * 枚举类型
+ * @since 0.2.0
  */
-export const MEnumScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('enum'),
-    /**
-     * The values in enum.
-     * @desczh
-     * 枚举值
-     */
-    values:t.withDefault(t.array(t.string),[]),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.string,
-  })
-])
-],'MEnumScalar')
+export const MEnumScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('enum'),
+        /**
+         * The values in enum.
+         * @desczh
+         * 枚举值
+         * @since 0.2.0
+         */
+        values: t.withDefault(t.array(t.string), [])
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.string
+      })
+    ])
+  ],
+  'MEnumScalar'
+)
 
 /**
  * json
  * @desczh
  * json类型
+ * @since 0.2.0
  */
-export const MJsonScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('json'),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.record(t.string,t.any),
-  })
-])
-],'MJsonScalar')
+export const MJsonScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('json')
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.record(t.string, t.any)
+      })
+    ])
+  ],
+  'MJsonScalar'
+)
 
 /**
  * Sring Format
  * @desczh
  * 文本格式
+ * @since 0.2.0
  */
-export const MStringFormat = t.keyof({"UUID":"","EMail":"","IPV4":"","IPV6":"","URL":""})
+export const MStringFormat = t.keyof({ UUID: '', EMail: '', IPV4: '', IPV6: '', URL: '' })
 /**
  * A String holds text. This is the type you would use for a username,
  * the content of a blog post or anything else that is best represented as text.
  * @desczh
  * 文本类型
+ * @since 0.2.0
  */
-export const MStringScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('string'),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.string,
-    /**
-     * The length of value must great than given value
-     * @desczh
-     * 字段的最小长度
-     */
-    minLength:t.int,
-    /**
-     * The length of value must less than given value
-     * @desczh
-     * 字段的最大长度
-     */
-    maxLength:t.int,
-    /**
-     * The length value must match the given pattern
-     * @desczh
-     * 字段必须匹配这个正则表达式
-     */
-    pattern:t.string,
-    /**
-     * The value must match the given format
-     * @desczh
-     * 字段必须匹配指定的格式
-     */
-    format:MStringFormat,
-  })
-])
-],'MStringScalar')
+export const MStringScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('string')
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.string,
+        /**
+         * The length of value must great than given value
+         * @desczh
+         * 字段的最小长度
+         * @since 0.2.0
+         */
+        minLength: t.int,
+        /**
+         * The length of value must less than given value
+         * @desczh
+         * 字段的最大长度
+         * @since 0.2.0
+         */
+        maxLength: t.int,
+        /**
+         * The length value must match the given pattern
+         * @desczh
+         * 字段必须匹配这个正则表达式
+         * @since 0.2.0
+         */
+        pattern: t.string,
+        /**
+         * The value must match the given format
+         * @desczh
+         * 字段必须匹配指定的格式
+         * @since 0.2.0
+         */
+        format: MStringFormat
+      })
+    ])
+  ],
+  'MStringScalar'
+)
 
 /**
  * A Number is a number that can have decimals.
  * Use this to store values such as the price of an item in a store or the result of complex calculations.
  * @desczh
  * 数值型
+ * @since 0.2.0
  */
-export const MNumberScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('number'),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.number,
-    /**
-     * The value must less than given value
-     * @desczh
-     * 字段的最大值
-     */
-    maximum:t.number,
-    /**
-     * The value must great than given value
-     * @desczh
-     * 字段的最小值
-     */
-    minimum:t.number,
-  })
-])
-],'MNumberScalar')
+export const MNumberScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('number')
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.number,
+        /**
+         * The value must less than given value
+         * @desczh
+         * 字段的最大值
+         * @since 0.2.0
+         */
+        maximum: t.number,
+        /**
+         * The value must great than given value
+         * @desczh
+         * 字段的最小值
+         * @since 0.2.0
+         */
+        minimum: t.number
+      })
+    ])
+  ],
+  'MNumberScalar'
+)
 
 /**
- * An Int is a number that cannot have decimals. 
+ * An Int is a number that cannot have decimals.
  * Use this to store values such as the weight of an ingredient required for a recipe or the minimum age for an event.
  * @desczh
  * 整型
+ * @since 0.2.0
  */
-export const MIntScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('int'),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.number,
-    /**
-     * The value must less than given value
-     * @desczh
-     * 字段的最大值
-     */
-    maximum:t.int,
-    /**
-     * The value must great than given value
-     * @desczh
-     * 字段的最小值
-     */
-    minimum:t.int,
-  })
-])
-],'MIntScalar')
+export const MIntScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('int')
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.number,
+        /**
+         * The value must less than given value
+         * @desczh
+         * 字段的最大值
+         * @since 0.2.0
+         */
+        maximum: t.int,
+        /**
+         * The value must great than given value
+         * @desczh
+         * 字段的最小值
+         * @since 0.2.0
+         */
+        minimum: t.int
+      })
+    ])
+  ],
+  'MIntScalar'
+)
 
 /**
  * A Boolean can have the value true or false.
@@ -238,269 +299,354 @@ export const MIntScalar =t.intersection([MScalable,t.intersection([  t.type({
  * or if a recipe is appropriate for vegetarians.
  * @desczh
  * 布尔型
+ * @since 0.2.0
  */
-export const MBooleanScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('boolean'),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.boolean,
-  })
-])
-],'MBooleanScalar')
+export const MBooleanScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('boolean')
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.boolean
+      })
+    ])
+  ],
+  'MBooleanScalar'
+)
 
 /**
  * The DateTime type can be used to store date and/or time values.
  * A good example might be a person's date of birth or the time/data when a specific event is happening.
  * @desczh
  * 日期型
+ * @since 0.2.0
  */
-export const MDateTimeScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('datetime'),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.literal('now'),
-  })
-])
-],'MDateTimeScalar')
+export const MDateTimeScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('datetime')
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.literal('now')
+      })
+    ])
+  ],
+  'MDateTimeScalar'
+)
 
 /**
  * The _kind is a tag that check which Sclar be used.
  * @desczh
  * 标签
+ * @since 0.2.0
  */
-export const MKindScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('kind'),
-    /**
-     * kind value
-     * @desczh
-     * 标签值
-     */
-    value:t.string,
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.string,
-  })
-])
-],'MKindScalar')
+export const MKindScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('kind'),
+        /**
+         * kind value
+         * @desczh
+         * 标签值
+         * @since 0.2.0
+         */
+        value: t.string
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.string
+      })
+    ])
+  ],
+  'MKindScalar'
+)
 
 /**
  * A type give a value of model types.
  * @desczh
  * 类型
+ * @since 0.2.0
  */
-export const MTypeScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('type'),
-    /**
-     * Model type name.
-     * @desczh
-     * 类型名称
-     */
-    value:t.string,
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.string,
-  })
-])
-],'MTypeScalar')
+export const MTypeScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('type'),
+        /**
+         * Model type name.
+         * @desczh
+         * 类型名称
+         * @since 0.2.0
+         */
+        value: t.string
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.string
+      })
+    ])
+  ],
+  'MTypeScalar'
+)
 
 /**
  * A union type describes a value that can be one of several types.
  * @desczh
  * 链接多个类型用OR
+ * @since 0.2.0
  */
-export const MTypeUnionScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('typeUnion'),
-    /**
-     * Model type name.
-     */
-    values:t.withDefault(t.array(t.string),[]),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.string,
-  })
-])
-],'MTypeUnionScalar')
+export const MTypeUnionScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('typeUnion'),
+        /**
+         * Model type name.
+         * @since 0.2.0
+         */
+        values: t.withDefault(t.array(t.string), [])
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.string
+      })
+    ])
+  ],
+  'MTypeUnionScalar'
+)
 
 /**
  * A intersection type describes a value that can be one of several types.
  * @desczh
  * 链接多个类型用AND
+ * @since 0.2.0
  */
-export const MTypeIntersectionScalar =t.intersection([MScalable,t.intersection([  t.type({
-    /**
-     * The _kind is a tag that check which Scalar be used.
-     * @desczh
-     * 标签判断哪一个Scalar被使用
-     */
-    _kind:t.literal('typeIntersection'),
-    /**
-     * Model type name.
-     */
-    values:t.withDefault(t.array(t.string),[]),
-  })
-,  t.partial({
-    /**
-     * You can set a default value for the field
-     * The value will be applied to newly created records when no value was supplied during the create-operation.
-     * @desczh
-     * 缺省值
-     */
-    defaultValue:t.string,
-  })
-])
-],'MTypeIntersectionScalar')
+export const MTypeIntersectionScalar = t.intersection(
+  [
+    MScalable,
+    t.intersection([
+      t.type({
+        /**
+         * The _kind is a tag that check which Scalar be used.
+         * @desczh
+         * 标签判断哪一个Scalar被使用
+         * @since 0.2.0
+         */
+        _kind: t.literal('typeIntersection'),
+        /**
+         * Model type name.
+         * @since 0.2.0
+         */
+        values: t.withDefault(t.array(t.string), [])
+      }),
+      t.partial({
+        /**
+         * You can set a default value for the field
+         * The value will be applied to newly created records when no value was supplied during the create-operation.
+         * @desczh
+         * 缺省值
+         * @since 0.2.0
+         */
+        defaultValue: t.string
+      })
+    ])
+  ],
+  'MTypeIntersectionScalar'
+)
 
 /**
  * Scalar
  * @desczh
  * 标量
+ * @since 0.2.0
  */
-export const MScalars = t.union([MEnumScalar,MStringScalar,MNumberScalar,MIntScalar,MBooleanScalar,MJsonScalar,MDateTimeScalar,MKindScalar,MTypeScalar,MTypeUnionScalar,MTypeIntersectionScalar])
+export const MScalars = t.union([
+  MEnumScalar,
+  MStringScalar,
+  MNumberScalar,
+  MIntScalar,
+  MBooleanScalar,
+  MJsonScalar,
+  MDateTimeScalar,
+  MKindScalar,
+  MTypeScalar,
+  MTypeUnionScalar,
+  MTypeIntersectionScalar
+])
 
 /**
  * basic scalar
  * @desczh
  * 基本标量
+ * @since 0.2.0
  */
-export const MBasicScalar = t.keyof({"string":"","number":"","boolean":"","int":"","datetime":"","json":""})
+export const MBasicScalar = t.keyof({ string: '', number: '', boolean: '', int: '', datetime: '', json: '' })
 /**
  * The define a scalar ref
  * @desczh
  * 定义一个标量的引用
+ * @since 0.2.0
  */
-export const MValueable =t.type({
+export const MValueable = t.type({
   /**
    *  The type of this Node. A value of type indicates a scalar type.
    * @desczh
    * 一个节点的类型
+   * @since 0.2.0
    */
-  type:t.withDefault(t.union([MScalars,MBasicScalar])
-,"string"),
+  type: t.withDefault(t.union([MScalars, MBasicScalar]), 'string'),
   /**
-   * The Node can be marked as required (also referred to as "non-nullable"). 
+   * The Node can be marked as required (also referred to as "non-nullable").
    * @desczh
    * 是否必填
+   * @since 0.2.0
    */
-  required:t.withDefault(t.boolean,false),
+  required: t.withDefault(t.boolean, false)
 })
- 
+
 /**
  * Document Tags
  * @desczh
  * 语句注释
+ * @since 0.2.0
  */
-export const MDocumentable =t.intersection([  t.type({
+export const MDocumentable = t.intersection([
+  t.type({
     /**
      * That this is no longer the preferred way.
      * @desczh
      * 过时，不再使用
+     * @since 0.2.0
      */
-    deprecated:t.withDefault(t.boolean,false),
+    deprecated: t.withDefault(t.boolean, false),
     /**
      * description
      * @desczh
      * 注释
+     * @since 0.2.0
      */
-    description:t.withDefault(t.array(t.string),[]),
+    description: t.withDefault(t.array(t.string), []),
     /**
      * Ignore the node when build  docs
      * @desczh
      * 是否在生成文档时跳过
+     * @since 0.2.0
      */
-    ignore:t.withDefault(t.boolean,false),
+    ignore: t.withDefault(t.boolean, false),
     /**
      * example code
      * @desczh
      * 示例代码
+     * @since 0.2.0
      */
-    examples:t.withDefault(t.array(t.string),[]),
+    examples: t.withDefault(t.array(t.string), []),
     /**
      * That reason of deprecation.
      * @desczh
      * 废弃原因
+     * @since 0.2.0
      */
-    reason:t.withDefault(t.array(t.string),[]),
+    reason: t.withDefault(t.array(t.string), []),
     /**
      * The path on root
      * @desczh
      * 在根目录下的路径
+     * @since 0.2.0
      */
-    path:t.withDefault(t.array(t.string),[]),
-  })
-,  t.partial({
+    path: t.withDefault(t.array(t.string), [])
+  }),
+  t.partial({
     /**
      * i18n description
      * @desczh
      * 国际化注释
+     * @since 0.2.0
      */
-    descriptions:t.record(t.string,t.any),
+    descriptions: t.record(t.string, t.any),
     /**
      * When was this feature added.
      * @desczh
      * 哪一个版本加入
+     * @since 0.2.0
      */
-    since:t.withDefault(t.string,"0.2.0"),
+    since: t.withDefault(t.string, '0.2.0'),
     /**
      * signature
      * @desczh
      * 签名
+     * @since 0.2.0
      */
-    signature:t.string,
+    signature: t.string
   })
 ])
 
@@ -508,323 +654,479 @@ export const MDocumentable =t.intersection([  t.type({
  * Type have a name field
  * @desczh
  * 有一个name字段
+ * @since 0.2.0
  */
-export const MNameable =t.type({
+export const MNameable = t.type({
   /**
    * The name is unique
    * @desczh
    * 唯一的名称
+   * @since 0.2.0
    */
-  name:t.stringMaxLength(64),
+  name: t.stringMaxLength(64)
 })
- 
+
 /**
  *  Represents a field in the datamodel.
  * ModelField is referenced by its name and is either scalar or a relation field.
  * @desczh
  * 表示接口有字段集合
+ * @since 0.2.0
  */
-export const MVariable =t.intersection([MDocumentable,MValueable,MNameable,t.type({
-})
- ],'MVariable')
+export const MVariable = t.intersection([MDocumentable, MValueable, MNameable, t.type({})], 'MVariable')
 
 /**
  *  Represents a field in the datamodel.
  * Field is referenced by its name and is either scalar or a relation field.
  * @desczh
  * 定义一个字段
+ * @since 0.2.0
  */
-export const MField =t.intersection([MVariable,t.type({
-  _kind:t.withDefault(t.literal('field'),"field"),
-  /**
-   * Setting the unique constraint makes sure that two records of the model in question cannot have the same value for a certain field. 
-   * @desczh
-   * 唯一.表示这个字段值在模型中不能重复
-   */
-  unique:t.withDefault(t.boolean,false),
-  /**
-   * Id in a model"). 
-   * @desczh
-   * 这个字段标明模型的唯一性
-   */
-  id:t.withDefault(t.boolean,false),
-  /**
-   * The field create by server.user can not edit
-   * @desczh
-   * 这个字段值有服务生成，用户不能修改
-   */
-  readonly:t.withDefault(t.boolean,false),
-  /**
-   * The field used by order
-   * @desczh
-   * 可以根据这个字段排序
-   */
-  order:t.withDefault(t.boolean,true),
-  /**
-   * That field exclusive when create model.
-   * @desczh
-   * 字段不在增加操作中使用
-   */
-  exclusiveCreate:t.withDefault(t.boolean,false),
-  /**
-   * That field exclusive when update model.
-   * @desczh
-   * 字段不在更新操作中使用
-   */
-  exclusiveUpdate:t.withDefault(t.boolean,false),
-  /**
-   * That field exclusive in where condition.
-   * @desczh
-   * 字段不在查询条件中
-   */
-  exclusiveWhere:t.withDefault(t.boolean,false),
-  /**
-   * That field exclusive in search result.
-   * @desczh
-   * 字段不在查询结果中
-   */
-  exclusiveSearch:t.withDefault(t.boolean,false),
-  /**
-   * That field exclusive in load result.
-   * @desczh
-   * 字段不在装载结果中
-   */
-  exclusiveLoad:t.withDefault(t.boolean,false),
-})
- ],'MField')
+export const MField = t.intersection(
+  [
+    MVariable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('field'), 'field'),
+      /**
+       * Setting the unique constraint makes sure that two records of the model in question cannot have the same value for a certain field.
+       * @desczh
+       * 唯一.表示这个字段值在模型中不能重复
+       * @since 0.2.0
+       */
+      unique: t.withDefault(t.boolean, false),
+      /**
+       * Id in a model").
+       * @desczh
+       * 这个字段标明模型的唯一性
+       * @since 0.2.0
+       */
+      id: t.withDefault(t.boolean, false),
+      /**
+       * The field create by server.user can not edit
+       * @desczh
+       * 这个字段值有服务生成，用户不能修改
+       * @since 0.2.0
+       */
+      readonly: t.withDefault(t.boolean, false),
+      /**
+       * The field used by order
+       * @desczh
+       * 可以根据这个字段排序
+       * @since 0.2.0
+       */
+      order: t.withDefault(t.boolean, true),
+      /**
+       * That field exclusive when create model.
+       * @desczh
+       * 字段不在增加操作中使用
+       * @since 0.2.0
+       */
+      exclusiveCreate: t.withDefault(t.boolean, false),
+      /**
+       * That field exclusive when update model.
+       * @desczh
+       * 字段不在更新操作中使用
+       * @since 0.2.0
+       */
+      exclusiveUpdate: t.withDefault(t.boolean, false),
+      /**
+       * That field exclusive in where condition.
+       * @desczh
+       * 字段不在查询条件中
+       * @since 0.2.0
+       */
+      exclusiveWhere: t.withDefault(t.boolean, false),
+      /**
+       * That field exclusive in search result.
+       * @desczh
+       * 字段不在查询结果中
+       * @since 0.2.0
+       */
+      exclusiveSearch: t.withDefault(t.boolean, false),
+      /**
+       * That field exclusive in load result.
+       * @desczh
+       * 字段不在装载结果中
+       * @since 0.2.0
+       */
+      exclusiveLoad: t.withDefault(t.boolean, false)
+    })
+  ],
+  'MField'
+)
 
 /**
  * Param is used by method.
  * @desczh
  * 函数中的参数定义
+ * @since 0.2.0
  */
-export const MParam =t.intersection([MVariable,t.type({
-  _kind:t.withDefault(t.literal('param'),"param"),
-})
- ],'MParam')
+export const MParam = t.intersection(
+  [
+    MVariable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('param'), 'param')
+    })
+  ],
+  'MParam'
+)
 
 /**
  * The define a basic function.
  * @desczh
  * 基本函数定义
+ * @since 0.2.0
  */
-export const MFunctional =t.intersection([MDocumentable,MValueable,MNameable,t.type({
-  /**
-   * Param Array
-   * @desczh
-   * 参数集合
-   */
-  params:t.withDefault(t.array(MParam),[]),
-  /**
-   * The means that the method return void 
-   * @desczh
-   * 是否返回值为void
-   */
-  returnVoid:t.withDefault(t.boolean,false),
-})
- ],'MFunctional')
+export const MFunctional = t.intersection(
+  [
+    MDocumentable,
+    MValueable,
+    MNameable,
+    t.type({
+      /**
+       * Param Array
+       * @desczh
+       * 参数集合
+       * @since 0.2.0
+       */
+      params: t.withDefault(t.array(MParam), []),
+      /**
+       * The means that the method return void
+       * @desczh
+       * 是否返回值为void
+       * @since 0.2.0
+       */
+      returnVoid: t.withDefault(t.boolean, false)
+    })
+  ],
+  'MFunctional'
+)
 
 /**
  * The define a method.
  * @desczh
  * 定义了一个方法
+ * @since 0.2.0
  */
-export const MMethod =t.intersection([MFunctional,t.type({
-  _kind:t.withDefault(t.literal('method'),"method"),
-})
- ],'MMethod')
+export const MMethod = t.intersection(
+  [
+    MFunctional,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('method'), 'method')
+    })
+  ],
+  'MMethod'
+)
 
 /**
  * The define a static method.
  * @desczh
  * 定义了一个静态方法
+ * @since 0.2.0
  */
-export const MStaticMethod =t.intersection([MFunctional,t.type({
-  _kind:t.withDefault(t.literal('staticmethod'),"staticmethod"),
-})
- ],'MStaticMethod')
+export const MStaticMethod = t.intersection(
+  [
+    MFunctional,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('staticmethod'), 'staticmethod')
+    })
+  ],
+  'MStaticMethod'
+)
 
 /**
  * The Node can export on module
  * @desczh
  * 节点是否在模块导出
+ * @since 0.2.0
  */
-export const MExportable =t.type({
+export const MExportable = t.type({
   /**
    * This contains tag 'export'
    * @desczh
    * 是否有导出标记
+   * @since 0.2.0
    */
-  isExported:t.withDefault(t.boolean,true),
+  isExported: t.withDefault(t.boolean, true)
 })
- 
+
 /**
  * The define a function.
  * @desczh
  * 定义了一个方法
+ * @since 0.2.0
  */
-export const MFunction =t.intersection([MFunctional,MExportable,t.type({
-  _kind:t.withDefault(t.literal('function'),"function"),
-})
- ],'MFunction')
+export const MFunction = t.intersection(
+  [
+    MFunctional,
+    MExportable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('function'), 'function')
+    })
+  ],
+  'MFunction'
+)
 
 /**
  * The define a constant.
  * @desczh
  * 定义了一个常量
+ * @since 0.2.0
  */
-export const MConstant =t.intersection([MVariable,MExportable,t.type({
-  _kind:t.withDefault(t.literal('constant'),"constant"),
-})
- ],'MConstant')
+export const MConstant = t.intersection(
+  [
+    MVariable,
+    MExportable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('constant'), 'constant')
+    })
+  ],
+  'MConstant'
+)
 
 /**
  * The define a export.
  * @desczh
  * 定义了一个Export
+ * @since 0.2.0
  */
-export const MExport =t.intersection([MDocumentable,MNameable,t.type({
-  _kind:t.withDefault(t.literal('export'),"export"),
-})
- ],'MExport')
+export const MExport = t.intersection(
+  [
+    MDocumentable,
+    MNameable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('export'), 'export')
+    })
+  ],
+  'MExport'
+)
 
 /**
  * MTypeable consist of multiple fields and multiple methods
  * @desczh
  * 可类型化表示这个类型由多个字段和方法组成
+ * @since 0.2.0
  */
-export const MTypeable =t.intersection([MDocumentable,MExportable,MNameable,t.type({
-  /**
-   * The define fields on the type.
-   * @desczh
-   * 字段集合
-   */
-  fields:t.withDefault(t.array(MField),[]),
-  /**
-   * The define methods on the type.
-   * @desczh
-   * 方法集合
-   */
-  methods:t.withDefault(t.array(MMethod),[]),
-})
- ],'MTypeable')
+export const MTypeable = t.intersection(
+  [
+    MDocumentable,
+    MExportable,
+    MNameable,
+    t.type({
+      /**
+       * The define fields on the type.
+       * @desczh
+       * 字段集合
+       * @since 0.2.0
+       */
+      fields: t.withDefault(t.array(MField), []),
+      /**
+       * The define methods on the type.
+       * @desczh
+       * 方法集合
+       * @since 0.2.0
+       */
+      methods: t.withDefault(t.array(MMethod), [])
+    })
+  ],
+  'MTypeable'
+)
 
 /**
  * The Define a interface
  * @desczh
  * 定义一个接口
+ * @since 0.2.0
  */
-export const MInterface =t.intersection([MTypeable,t.type({
-  /**
-   * kind
-   * @desczh
-   * 标识
-   */
-  _kind:t.withDefault(t.literal('interface'),"interface"),
-  /**
-   * The names be  implemented by the interface
-   * @desczh
-   * 实现的接口名称集合
-   */
-  implements:t.withDefault(t.array(t.string),[]),
-})
- ],'MInterface')
+export const MInterface = t.intersection(
+  [
+    MTypeable,
+    t.type({
+      /**
+       * kind
+       * @desczh
+       * 标识
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('interface'), 'interface'),
+      /**
+       * The names be  implemented by the interface
+       * @desczh
+       * 实现的接口名称集合
+       * @since 0.2.0
+       */
+      implements: t.withDefault(t.array(t.string), [])
+    })
+  ],
+  'MInterface'
+)
 
 /**
  * The Define a Class
  * @desczh
  * 定义一个类
+ * @since 0.2.0
  */
-export const MClass =t.intersection([MTypeable,t.type({
-  _kind:t.withDefault(t.literal('class'),"class"),
-  /**
-   * The names be  implemented by the interface
-   * @desczh
-   * 实现的接口名称集合
-   */
-  implements:t.withDefault(t.array(t.string),[]),
-  /**
-   * Static Method Array
-   * @desczh
-   * 静态方法集合
-   */
-  staticMethods:t.withDefault(t.array(MStaticMethod),[]),
-})
- ],'MClass')
+export const MClass = t.intersection(
+  [
+    MTypeable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('class'), 'class'),
+      /**
+       * The names be  implemented by the interface
+       * @desczh
+       * 实现的接口名称集合
+       * @since 0.2.0
+       */
+      implements: t.withDefault(t.array(t.string), []),
+      /**
+       * Static Method Array
+       * @desczh
+       * 静态方法集合
+       * @since 0.2.0
+       */
+      staticMethods: t.withDefault(t.array(MStaticMethod), [])
+    })
+  ],
+  'MClass'
+)
 
 /**
  * The Define a Type alias
  * @desczh
  * 定义一个类型别名
+ * @since 0.2.0
  */
-export const MTypeAlias =t.intersection([MTypeable,MValueable,t.type({
-  _kind:t.withDefault(t.literal('typealias'),"typealias"),
-})
- ],'MTypeAlias')
+export const MTypeAlias = t.intersection(
+  [
+    MTypeable,
+    MValueable,
+    t.type({
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('typealias'), 'typealias')
+    })
+  ],
+  'MTypeAlias'
+)
 
 /**
  * The Define a Module
  * @desczh
  * 定义一个Module
+ * @since 0.2.0
  */
-export const MModule =t.intersection([MDocumentable,MNameable,t.type({
-  /**
-   * True mean The module will generate doc
-   * @desczh
-   * 为真时表示产生文档
-   */
-  file:t.withDefault(t.boolean,false),
-  _kind:t.withDefault(t.literal('module'),"module"),
-  /**
-   * interfaces
-   * @desczh
-   * 接口集合
-   */
-  interfaces:t.withDefault(t.array(MInterface),[]),
-  /**
-   * type aliases
-   * @desczh
-   * 类型别名集合
-   */
-  typealiases:t.withDefault(t.array(MTypeAlias),[]),
-  /**
-   * classes
-   * @desczh
-   * 类集合
-   */
-  classes:t.withDefault(t.array(MClass),[]),
-  /**
-   * functions
-   * @desczh
-   * 函数集合
-   */
-  functions:t.withDefault(t.array(MFunction),[]),
-  /**
-   * export
-   * @desczh
-   * 导出
-   */
-  exports:t.withDefault(t.array(MExport),[]),
-  /**
-   * constants
-   * @desczh
-   * 常量集合
-   */
-  constants:t.withDefault(t.array(MConstant),[]),
-  /**
-   * Id field only one
-   * @desczh
-   * 是否只有一个Id字段
-   */
-  idUnique:t.withDefault(t.boolean,false),
-})
- ],'MModule')
+export const MModule = t.intersection(
+  [
+    MDocumentable,
+    MNameable,
+    t.type({
+      /**
+       * True mean The module will generate doc
+       * @desczh
+       * 为真时表示产生文档
+       * @since 0.2.0
+       */
+      file: t.withDefault(t.boolean, false),
+      /**
+       * @since 0.2.0
+       */
+      _kind: t.withDefault(t.literal('module'), 'module'),
+      /**
+       * interfaces
+       * @desczh
+       * 接口集合
+       * @since 0.2.0
+       */
+      interfaces: t.withDefault(t.array(MInterface), []),
+      /**
+       * type aliases
+       * @desczh
+       * 类型别名集合
+       * @since 0.2.0
+       */
+      typealiases: t.withDefault(t.array(MTypeAlias), []),
+      /**
+       * classes
+       * @desczh
+       * 类集合
+       * @since 0.2.0
+       */
+      classes: t.withDefault(t.array(MClass), []),
+      /**
+       * functions
+       * @desczh
+       * 函数集合
+       * @since 0.2.0
+       */
+      functions: t.withDefault(t.array(MFunction), []),
+      /**
+       * export
+       * @desczh
+       * 导出
+       * @since 0.2.0
+       */
+      exports: t.withDefault(t.array(MExport), []),
+      /**
+       * constants
+       * @desczh
+       * 常量集合
+       * @since 0.2.0
+       */
+      constants: t.withDefault(t.array(MConstant), []),
+      /**
+       * Id field only one
+       * @desczh
+       * 是否只有一个Id字段
+       * @since 0.2.0
+       */
+      idUnique: t.withDefault(t.boolean, false)
+    })
+  ],
+  'MModule'
+)
 
 /**
  * type kind
  * @desczh
  * 类型标示
+ * @since 0.2.0
  */
-export const MIdentifierKind = t.keyof({"field":"","typealias":"","interface":"","class":"","export":"","function":"","param":"","constant":"","module":"","method":"","staticmethod":""})
-
-
+export const MIdentifierKind = t.keyof({
+  field: '',
+  typealias: '',
+  interface: '',
+  class: '',
+  export: '',
+  function: '',
+  param: '',
+  constant: '',
+  module: '',
+  method: '',
+  staticmethod: ''
+})

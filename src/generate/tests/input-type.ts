@@ -5,7 +5,6 @@ export interface NonEmptyArray<A> extends Array<A> {
     0: A
 }
 
-
 export type BasicScalar = 'string' | 'number' | 'boolean' | 'int' | 'datetime' | 'json'
 export type StringFormat = 'UUID' | 'EMail' | 'IPV4' | 'IPV6' | 'URL'
 export interface Documentable {
@@ -99,7 +98,7 @@ export interface NumberScalar {
   minimum?: number
 }
 /**
- * An Int is a number that cannot have decimals. 
+ * An Int is a number that cannot have decimals.
  * Use this to store values such as the weight of an ingredient required for a recipe or the minimum age for an event.
  */
 export interface IntScalar {
@@ -186,7 +185,7 @@ export interface TypeReference {
    */
   type?: EnumScalar | StringScalar | NumberScalar | IntScalar | BooleanScalar | JsonScalar | DateTimeScalar | KindScalar | TypeScalar | TypeUnionScalar | BasicScalar
   /**
-   * The Node can be marked as required (also referred to as "non-nullable"). 
+   * The Node can be marked as required (also referred to as "non-nullable").
    */
   required?: boolean
   /**
@@ -214,11 +213,11 @@ export interface Field extends Documentable, TypeReference {
    */
   name: string
   /**
-   * Setting the unique constraint makes sure that two records of the model in question cannot have the same value for a certain field. 
+   * Setting the unique constraint makes sure that two records of the model in question cannot have the same value for a certain field.
    */
   unique?: boolean
   /**
-   * Id only one in a model"). 
+   * Id only one in a model").
    */
   id?: boolean
   readonly?: boolean
@@ -258,11 +257,11 @@ export interface Method extends Documentable, TypeReference {
    */
   name: string
   /**
-   * Field can be marked as required (also referred to as "non-nullable"). 
+   * Field can be marked as required (also referred to as "non-nullable").
    */
   params?: Array<Param>
   /**
-   * The means that the method return void 
+   * The means that the method return void
    */
   returnVoid?: boolean
 }
@@ -283,7 +282,7 @@ export interface Export extends Documentable {
   name: string
 }
 /**
- * ModelType consist of multiple fields and typically represent entities from your application domain (e.g. User, Car, Order). 
+ * ModelType consist of multiple fields and typically represent entities from your application domain (e.g. User, Car, Order).
  * An Model Type defines the structure for one model in your datamodel.
  * It is used to represent entities from your application domain.
  */
@@ -297,7 +296,7 @@ export interface Interface extends Documentable, Modular {
   name: string
 }
 /**
- * ModelType consist of multiple fields and typically represent entities from your application domain (e.g. User, Car, Order). 
+ * ModelType consist of multiple fields and typically represent entities from your application domain (e.g. User, Car, Order).
  * An Model Type defines the structure for one model in your datamodel.
  * It is used to represent entities from your application domain.
  */
@@ -305,7 +304,7 @@ export interface Class extends Interface, Modular {
   staticMethods?: Array<Method>
 }
 /**
- * ModelType consist of multiple fields and typically represent entities from your application domain (e.g. User, Car, Order). 
+ * ModelType consist of multiple fields and typically represent entities from your application domain (e.g. User, Car, Order).
  * An Model Type defines the structure for one model in your datamodel.
  * It is used to represent entities from your application domain.
  */
@@ -333,5 +332,3 @@ export interface Module extends Documentable {
    */
   name: string
 }
-
-

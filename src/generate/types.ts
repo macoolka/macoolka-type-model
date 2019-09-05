@@ -2,8 +2,9 @@
  * @file
  */
 import { MModule } from '../models/Module'
+import { MonadFunctionSync } from 'macoolka-app/lib/MonadFunctionSync'
 /**
- * Provide a option at build a TS. 
+ * Provide a option at build a TS.
  * @desczh
  * 建立TS的选项
  */
@@ -13,13 +14,13 @@ export interface TSOptions {
      * @desczh
      * 注释
      */
-    header?: string[]
+    header?: Array<string>
     /**
      * import statement
      * @desczh
      * 导入语句
      */
-    imports?: string[]
+    imports?: Array<string>
     /**
      * The field that have defaultvalue is optinal when True
      * @desczh
@@ -32,6 +33,12 @@ export interface TSOptions {
      * 是否打印注释
      */
     showDesc?: boolean
+    /**
+     * Ignore Type names when validation.
+     * @desczh
+     * 在校验时忽略给定的类型名字
+     */
+    ignoreTypeNames?: Array<string>
 }
 /**
  * Print a Module to ts code text
@@ -40,5 +47,5 @@ export interface TSOptions {
  * @since 0.2.0
  */
 export interface TSBuild {
-    (option?: TSOptions): (schema: MModule) => string
+    (option?: TSOptions): MonadFunctionSync<MModule,string>
 }

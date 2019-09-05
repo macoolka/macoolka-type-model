@@ -1,18 +1,18 @@
 /**
- * Monoid Ord
+ * Monoid and Ord
  * @file
  */
 import { Monoid, fold } from 'fp-ts/lib/Monoid'
 import { Ord, contramap, ordString } from 'fp-ts/lib/Ord'
 import { pipe } from 'fp-ts/lib/pipeable'
 import { MModule, MField, MInterface, MClass, MTypeAlias, MFunction, MConstant, MExport, MMethod, MParam } from './models/Module'
-
 import * as Module from './models/Module'
 import * as InputModule from './models/InputModule'
 export {
     Module,
     InputModule
 }
+
 /**
  * @since 0.2.0
  */
@@ -20,32 +20,32 @@ export const MMoudleMonoid: Monoid<MModule> = {
     concat: (x, y) => ({
         ...y,
         interfaces: [
-            ...x.interfaces ? x.interfaces : [],
-            ...y.interfaces ? y.interfaces : []
+            ...x.interfaces,
+            ...y.interfaces
         ],
         typealiases: [
-            ...x.typealiases ? x.typealiases : [],
-            ...y.typealiases ? y.typealiases : []
+            ...x.typealiases,
+            ...y.typealiases
         ],
         classes: [
-            ...x.classes ? x.classes : [],
-            ...y.classes ? y.classes : []
+            ...x.classes,
+            ...y.classes
         ],
         functions: [
-            ...x.functions ? x.functions : [],
-            ...y.functions ? y.functions : []
+            ...x.functions,
+            ...y.functions
         ],
         constants: [
-            ...x.constants ? x.constants : [],
-            ...y.constants ? y.constants : []
+            ...x.constants,
+            ...y.constants
         ],
         exports: [
-            ...x.exports ? x.exports : [],
-            ...y.exports ? y.exports : []
-        ],
+            ...x.exports,
+            ...y.exports
+        ]
     }),
     empty: {
-        _kind:'module',
+        _kind: 'module',
         name: 'macoolka',
         examples: [],
         deprecated: false,
@@ -60,14 +60,13 @@ export const MMoudleMonoid: Monoid<MModule> = {
         functions: [],
         constants: [],
         exports: [],
-        idUnique: false,
+        idUnique: false
     }
 }
 /**
  * @since 0.2.0
  */
 export const foldSchema = fold(MMoudleMonoid)
-
 
 const ordByName = <A extends { name: string }>(): Ord<A> => pipe(
     ordString,
@@ -76,40 +75,40 @@ const ordByName = <A extends { name: string }>(): Ord<A> => pipe(
 /**
  * @since 0.2.0
  */
-export const ordModule = ordByName<MModule>();
+export const ordModule = ordByName<MModule>()
 /**
  * @since 0.2.0
  */
-export const ordField = ordByName<MField>();
+export const ordField = ordByName<MField>()
 /**
  * @since 0.2.0
  */
-export const ordInterface = ordByName<MInterface>();
+export const ordInterface = ordByName<MInterface>()
 /**
  * @since 0.2.0
  */
-export const ordClass = ordByName<MClass>();
+export const ordClass = ordByName<MClass>()
 /**
  * @since 0.2.0
  */
-export const ordFunction = ordByName<MFunction>();
+export const ordFunction = ordByName<MFunction>()
 /**
  * @since 0.2.0
  */
-export const ordConstant = ordByName<MConstant>();
+export const ordConstant = ordByName<MConstant>()
 /**
  * @since 0.2.0
  */
-export const ordExport = ordByName<MExport>();
+export const ordExport = ordByName<MExport>()
 /**
  * @since 0.2.0
  */
-export const ordTypeAlias = ordByName<MTypeAlias>();
+export const ordTypeAlias = ordByName<MTypeAlias>()
 /**
  * @since 0.2.0
  */
-export const ordMethod = ordByName<MMethod>();
+export const ordMethod = ordByName<MMethod>()
 /**
  * @since 0.2.0
  */
-export const ordParam = ordByName<MParam>();
+export const ordParam = ordByName<MParam>()

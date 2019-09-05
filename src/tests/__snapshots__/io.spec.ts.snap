@@ -1,17 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`io interface empty 1`] = `"无效的值undefined : MInterface/0: MTypeable/2: { name: stringMaxLength=64 }/name: 最大长度=64"`;
+exports[`io interface empty 1`] = `"Invalid value undefined supplied to : MInterface/0: MTypeable/2: { name: stringMaxLength=64 }/name: string max length=64"`;
 
 exports[`io interface empty 2`] = `"无效的值undefined : MInterface/0: MTypeable/2: { name: stringMaxLength=64 }/name: 最大长度=64"`;
 
-exports[`io validate field name validate field name repeat 1`] = `"在模型(test)中字段名称(\\"\\\\\\"a1\\\\\\"\\")重复. : Module"`;
+exports[`io validate field name validate field name repeat 1`] = `
+"
+Field name [\\"\\\\\\"a1\\\\\\"\\"] repeat in Model[test]. : Module"
+`;
 
-exports[`io validate field name validate field name repeat 2`] = `"在模型(test)中字段名称(\\"\\\\\\"a1\\\\\\"\\")重复. : Module"`;
+exports[`io validate field name validate field name repeat 2`] = `
+"
+在模型(test)中字段名称(\\"\\\\\\"a1\\\\\\"\\")重复. : Module"
+`;
 
-exports[`io validateId validateId empty 1`] = `"模块test必须有一个Id字段 : Module"`;
+exports[`io validateId validateId empty 1`] = `
+"
+Id not found  in test : Module"
+`;
 
-exports[`io validateId validateId empty 2`] = `"模块test必须有一个Id字段 : Module"`;
+exports[`io validateId validateId empty 2`] = `
+"
+模块test必须有一个Id字段 : Module"
+`;
 
-exports[`io validateId validateId repeat 1`] = `"Id[a1,a2] repeat in Model[test]. : Module"`;
+exports[`io validateId validateId repeat 1`] = `
+"
+Id[a1,a2] repeat in Model[test]. : Module"
+`;
 
-exports[`io validateId validateId repeat 2`] = `"Id[a1,a2]在模块[test]中重复. : Module"`;
+exports[`io validateId validateId repeat 2`] = `
+"
+Id[a1,a2]在模块[test]中重复. : Module"
+`;
